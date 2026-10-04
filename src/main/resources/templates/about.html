@@ -1,0 +1,391 @@
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+    .hero-section {
+      height: 100vh;
+      background-image: url('images/slider-hero.png'); 
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-family: 'Cormorant Garamond', serif;
+      color: #fdf8e4;
+    }
+
+    .hero-title .black {
+      color: #000; /* "Indian" black */
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero-section">
+    <div>
+      <p>ESTABLISHED 2026</p>
+      
+      <h1 class="hero-title">
+        Redefining <span class="black">Indian</span><br>
+        Modernity
+      </h1>
+      
+      <p class="hero-subtitle">
+        Where the timeless elegance of heritage meets the bold spirit of contemporary design.
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      background: #fafafa;
+    }
+
+    .about-section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .section-title .italic {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .title-underline {
+      width: 50px;
+      height: 2px;
+      background: #000;
+      margin-bottom: 30px;
+    }
+
+    .section-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .about-img {
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    .image-wrapper {
+      position: relative;
+    }
+
+    .badge-box {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: #000;
+      color: #fff;
+      padding: 25px 30px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .badge-box h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .badge-box p {
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      text-decoration: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 768px) {
+      .section-title { font-size: 2.2rem; }
+      .badge-box { right: 10px; bottom: -10px; padding: 15px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SECTION 1: Crafted With Purpose -->
+<section class="about-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Left Image -->
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img src="images/story.png" class="about-img" alt="Crafted With Purpose">
+      </div>
+      
+      <!-- Right Text -->
+      <div class="col-md-6">
+        <p class="section-label">OUR PHILOSOPHY</p>
+        <h2 class="section-title">Crafted With <span class="italic">Purpose</span></h2>
+        <div class="title-underline"></div>
+        
+        <p class="section-text">
+          At Antar, we believe that fashion is more than just clothing – it's a narrative. 
+          Our journey began with a simple vision: to create a brand that celebrates the rich textile 
+          heritage of India while speaking the language of the modern world.
+        </p>
+        <p class="section-text">
+          Every piece in our collection is a labor of love, born from a collaboration between 
+          master artisans and visionary designers. We source the finest natural fibers and employ 
+          traditional techniques like hand-embroidery and block printing, ensuring that each garment 
+          is as unique as the person wearing it.
+        </p>
+            <p class="section-text">
+          Our commitment to sustainability is woven into every stitch. We prioritize ethical 
+          production and slow fashion, creating pieces that are designed to be cherished for a 
+          lifetime, not just a season.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 2: Image + Text + Badge -->
+<section class="about-section pt-0">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Left Image with Badge -->
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div class="image-wrapper">
+          
+          <div class="badge-box">
+            <h3>10+</h3>
+            <p>YEARS OF ARTISTRY</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Text -->
+      <div class="col-md-6">
+    
+      </div>
+    </div>
+
+    <!-- Core Values Heading -->
+    <div class="row mt-5 pt-5 text-center">
+      <div class="col-12">
+        <p class="section-label">OUR FOUNDATION</p>
+        <h2 class="section-title">Core Values</h2>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/8840735529" target="_blank" class="whatsapp-float">💬</a>
+
+</body>
+</html>
+
+
+<!-- SECTION 3: STATS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-6 col-md-3 stat-item">
+        <h2 class="stat-number">50k+</h2>
+        <p class="stat-label">GLOBAL CLIENTS</p>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <h2 class="stat-number">120+</h2>
+        <p class="stat-label">ARTISAN PARTNERS</p>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <h2 class="stat-number">15+</h2>
+        <p class="stat-label">AWARDS WON</p>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <h2 class="stat-number">100%</h2>
+        <p class="stat-label">HANDCRAFTED</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 4: CTA BANNER -->
+<section class="cta-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8 mb-3 mb-md-0">
+        <h2 class="cta-title">Experience the Antar Collection</h2>
+        <p class="cta-text">
+          Join us in our journey of celebrating craftsmanship and contemporary style.
+        </p>
+      </div>
+      <div class="col-md-4 text-md-end text-center">
+        <a href="shop.html" class="cta-btn">Shop Collection</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+/* ===== STATS SECTION CSS ===== */
+.stats-section {
+  padding: 80px 0;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #000;
+  line-height: 1;
+}
+
+/* 3rd aur 4th number halke brown */
+.stat-item:nth-child(3) .stat-number,
+.stat-item:nth-child(4) .stat-number {
+  color: #a3917a; 
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ===== CTA SECTION CSS ===== */
+.cta-section {
+  padding: 100px 0;
+  background: #f5f5f5; /* halka grey background */
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+.cta-text {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  background: #a3917a; /* brown button photo jaisa */
+  color: #fff;
+  padding: 16px 38px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border-radius: 3px;
+  transition: 0.3s ease;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.cta-btn:hover {
+  background: #8a7a66;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .stats-section, .cta-section { padding: 60px 0; }
+  .stat-number { font-size: 2.5rem; }
+  .cta-title { font-size: 2rem; text-align: center; }
+  .cta-text { text-align: center; margin-bottom: 20px; }
+  .stat-item { margin-bottom: 30px; }
+}
+</style>
+
+
+</main>
+
+
+</body>
+
+
+</html>

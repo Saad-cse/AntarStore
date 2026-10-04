@@ -1,0 +1,124 @@
+/* ==========================================================================
+   ANTARSTORE — premium theme layer
+   Loaded after style.css / cart.css so it can refine, not replace, the
+   existing layout. Palette matches the gold-on-charcoal accent already used
+   on the cart page (#D4AF37) so the whole site feels like one brand instead
+   of one styled page bolted onto a plain one.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --antar-ink:#1c1a17;
+  --antar-charcoal:#2a2a2a;
+  --antar-cream:#faf7f2;
+  --antar-gold:#c9a24b;
+  --antar-gold-deep:#a9822f;
+  --antar-muted:#7a7570;
+}
+
+body{
+  font-family:'Inter', 'Poppins', sans-serif;
+  color:var(--antar-ink);
+  background:var(--antar-cream);
+}
+
+h1,h2,h3,h4,
+.brand-word,
+.vct-page-title,
+.cta-title{
+  font-family:'Playfair Display', Georgia, serif;
+  letter-spacing:.2px;
+}
+
+/* ---------- Brand mark (fixes the old avatar-style circular crop, which
+   chopped the tails off the Antar script logo) ---------- */
+.brand-logo{
+  height:46px;
+  width:auto;
+  border-radius:0;
+  object-fit:contain;
+  margin:0 8px 0 0;
+}
+.brand-word{
+  font-size:1.35rem;
+  font-weight:800;
+  color:var(--antar-ink);
+  letter-spacing:.5px;
+}
+.brand-tagline{
+  display:block;
+  font-size:10px;
+  letter-spacing:2.5px;
+  color:var(--antar-muted);
+  text-transform:uppercase;
+}
+.footer-logo{
+  height:42px;
+  width:auto;
+  border-radius:0;
+  object-fit:contain;
+  filter:brightness(0) invert(1); /* render the dark wordmark legibly on the dark footer */
+}
+
+/* ---------- Navigation ---------- */
+.nav-bar{
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(6px);
+  box-shadow:0 2px 18px rgba(0,0,0,.06);
+}
+.nav-menu a{
+  position:relative;
+  letter-spacing:1px;
+}
+.nav-menu a:hover{
+  color:var(--antar-gold-deep) !important;
+}
+
+/* ---------- Buttons ---------- */
+.btn-warning{
+  background:var(--antar-gold) !important;
+  border-color:var(--antar-gold) !important;
+  color:#1c1a17 !important;
+  font-weight:600;
+  letter-spacing:.5px;
+  transition:.25s ease;
+}
+.btn-warning:hover{
+  background:var(--antar-gold-deep) !important;
+  border-color:var(--antar-gold-deep) !important;
+  transform:translateY(-1px);
+}
+.btn-dark{
+  background:var(--antar-ink);
+  border-color:var(--antar-ink);
+  letter-spacing:.5px;
+  transition:.25s ease;
+}
+.btn-dark:hover{
+  background:#000;
+  transform:translateY(-1px);
+}
+.text-warning{
+  color:var(--antar-gold-deep) !important;
+}
+
+/* ---------- Cards / product tiles ---------- */
+.card{
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+
+/* ---------- Footer ---------- */
+.footer{
+  background:linear-gradient(180deg,#1c1a17,#111111) !important;
+}
+.footer-title{
+  color:var(--antar-gold);
+  letter-spacing:2px;
+  font-weight:700;
+  font-size:13px;
+  text-transform:uppercase;
+}
+
+/* ---------- Small utility ---------- */
+.rounded-0{ border-radius:0 !important; }

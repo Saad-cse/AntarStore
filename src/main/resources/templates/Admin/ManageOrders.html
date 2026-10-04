@@ -1,0 +1,55 @@
+<html th:replace="~{Admin/Adminbase::layout(~{::main})}">
+   <body>
+      <main class="container-fluid py-4 bg-light">
+
+        <h2 class="fw-bold text-success mb-4"><i class="bi bi-cart-check-fill me-2"></i>Manage Orders</h2>
+
+        <div th:if="${msg}" class="alert alert-success" th:text="${msg}"></div>
+
+        <div class="card shadow-sm border-0">
+          <div class="card-body table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Product</th>
+                  <th>Qty</th>
+                  <th>Amount</th>
+                  <th>Placed On</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="order : ${orders}">
+                  <td th:text="${order.orderId}"></td>
+                  <td th:text="${order.customerName}"></td>
+                  <td th:text="${order.productName + ' (' + order.color + '/' + order.size + ')'}"></td>
+                  <td th:text="${order.quantity}"></td>
+                  <td th:text="'₹' + ${order.totalAmount}"></td>
+                  <td th:text="${#temporals.format(order.orderedAt, 'dd MMM yyyy')}"></td>
+                  <td><span class="badge bg-secondary" th:text="${order.paymentStatus}"></span></td>
+                  <td><span class="badge bg-dark" th:text="${order.orderStatus}"></span></td>
+                  <td>
+                    <form th:action="@{'/Admin/UpdateOrderStatus/' + ${order.id}}" method="post" class="d-flex gap-2">
+                      <select name="orderStatus" class="form-select form-select-sm">
+                        <option th:each="s : ${T(com.project.antarstore.Model.Orders.OrderStatus).values()}"
+                                th:value="${s}" th:text="${s}"
+                                th:selected="${s == order.orderStatus}"></option>
+                      </select>
+                      <button type="submit" class="btn btn-sm btn-outline-success">Update</button>
+                    </form>
+                  </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(orders)}">
+                  <td colspan="9" class="text-center text-muted py-4">No orders yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+   </body>
+</html>

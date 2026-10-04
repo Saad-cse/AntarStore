@@ -1,0 +1,53 @@
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+    <div class="row bg-dark bg-opacity-50 text-center py-5">
+        <h2 class="fw-bold fs-1 py-3">Delivery Address</h2>
+        <p>We'll deliver your order here. You can update it any time before checkout.</p>
+    </div>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+
+                <div th:if="${msg}" class="alert alert-info" th:text="${msg}"></div>
+
+                <div class="card shadow-sm border-0 rounded-0">
+                    <div class="card-body p-4">
+
+                        <form action="/address" method="post" th:object="${dto}">
+
+                            <div class="mb-3">
+                                <label class="form-label text-uppercase">Customer Name</label>
+                                <input type="text" class="form-control rounded-0" th:field="*{customerName}" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-uppercase">Contact Number</label>
+                                <input type="text" class="form-control rounded-0" th:field="*{contactNo}" maxlength="10" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-uppercase">Pincode</label>
+                                <input type="text" class="form-control rounded-0" th:field="*{pincode}" maxlength="6" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-uppercase">Full Address</label>
+                                <textarea class="form-control rounded-0" rows="4" th:field="*{address}" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark w-100 py-2 text-uppercase">
+                                Save Address
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

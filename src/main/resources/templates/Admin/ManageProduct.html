@@ -1,0 +1,52 @@
+<html th:replace="~{Admin/Adminbase::layout(~{::main})}">
+   <body>
+      <main>
+            <div class="row">
+               <div class="col-sm-12">
+                   <div class="card-header bg-primary">
+                      <h4 class="text-center text-white m-0"> Manage Products & Stocks</h4>
+                   </div>
+                   <div class="card-body">
+                       <div class="table-responsive">
+                          <table class="table table-bordered" id="example">
+                             <tr>
+                               <th>Srno.</th>
+                               <th>ProductName</th>
+                               <th>Images</th>
+                               <th>Description</th>
+                               <th>Category</th>
+                               <th>Price</th>
+                               <th>Stock</th>
+                               <th>Status</th>
+                               <th>Visible</th>
+                             </tr>
+                             <tr th:each="product,srno : ${products}">
+                                <td th:text="${srno.count}" class="text-center"></td>
+                                <td th:text="${product.productName}"></td>
+                                <td>
+                                   <img alt="Image not found"  th:each="image :${product.productImages}"  th:src="@{'/ProductImages/' + ${image}}" height="50px" width="50px" class="m-1 border border-1 p-1">
+                                  
+                                </td>
+                                <td th:text="${product.productDescription}"></td>
+                                <td th:text="${product.category != null ? product.category.categoryName : '-'}"></td>
+                                <td th:text="'₹' + ${product.finalprice}"></td>
+                                <td th:text="${product.quantity}"></td>
+                                <td><span class="badge bg-secondary" th:text="${product.status}"></span></td>
+                                <td>
+                                  <form th:action="@{'/Admin/ToggleProductVisibility/' + ${product.id}}" method="post">
+                                    <button type="submit" class="btn btn-sm"
+                                            th:classappend="${product.visibility} ? 'btn-outline-success' : 'btn-outline-secondary'"
+                                            th:text="${product.visibility} ? 'Visible' : 'Hidden'"></button>
+                                  </form>
+                                </td>
+                             
+                             </tr>
+                          </table>
+                       </div>
+                   </div>
+               </div>
+            </div>
+      </main>
+   
+   </body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row" style="min-height:100vh">
+         <div class="col-md-6 text-center  d-flex justify-content-center align-items-center">
+             <div class="">
+                  <img alt="image not found " src="images/r3.png" class="w-50 ">
+                  <h3 style="font-family:monotype corsiva " class=" fs-1 fw-bold">AntarStore</h3>
+                  <p>Register here to shop our premium collection</p>
+                 
+             </div>
+         </div>
+        <div class="col-md-6 d-flex justify-content -center align-items-center">
+             <div class="card rounded-0 py-3 px-4 w-100">
+                <form action="/Register" method="post" th:object="${dto}">
+                    <div class="mt-3">
+                       <label class="text-uppercase">Enter your name*</label>
+                       <input th:field="${dto.name}" type="text" required class="form-control rounded-0 mt-2" placeholder="Enter Name...">
+                    </div>
+                    <div class="mt-3">
+                       <label class="text-uppercase">
+                           Enter Contact No
+                       </label>
+                       <input th:field="${dto.contactNo}" type="number" required class="form-control mt-2 rounded-0 "placeholder=" Contact No...">
+                    </div>
+                    <div class="mt-3">
+                       <label class="text-uppercase">
+                           Enter Email Address
+                       </label>
+                       <input th:field="${dto.email}" type="email" required class="form-control mt-2 rounded-0 "placeholder=" Enter Email...">
+                    </div>
+                    <div class="mt-3">
+                       <label class="text-uppercase">
+                           Select Gender
+                       </label>
+                       <select th:field="${dto.gender}" class="form-control rounded-0 mt-2">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                       </select>
+                    </div>
+                    <div class="mt-3">
+                       <label class="text-uppercase">
+                           Enter Password
+                       </label>
+                       <input th:field="${dto.password}" type="password" required class="form-control mt-2 rounded-0 "placeholder=" Enter Password...">
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btn-warning">Register</button>
+                    </div>
+                </form>
+             </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script >
+        var msg ="[[${msg}]]";
+        if(msg!=""){
+        	alert(msg);
+        }
+    </script>
+  </body>
+</html>

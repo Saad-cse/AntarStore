@@ -1,0 +1,59 @@
+<html th:replace="~{Admin/Adminbase::layout(~{::main})}">
+   <body>
+      <main>
+            <div class="row">
+                <div class="col-sm-6 mx-auto">
+                     <a href="/Admin/ManageUsers" class="btn btn-secondary ms-2">All</a>
+                     <a th:href="@{ManageUsers(status = 'Verified')}" class="btn btn-success">Verified Users</a>
+                     <a th:href="@{ManageUsers(status = 'Unverified')}" class="btn btn-primary">Unverified Users</a>
+                     <a th:href="@{ManageUsers(status = 'Disabled')}" class="btn btn-danger">Disabled Users</a>
+                     
+                </div>
+                <div class="col-sm-12 mt-3">
+                   <div class="card shadow">
+                      <div class="card-header bg-primary">
+                           <h5 class="text-white m-0 text-center">Manage Users</h5>
+                      </div>
+                      <div class="card-body">
+                         <div class="table-responsive">
+                            <table class="table table-bordered" id="example">
+                               <tr class="text-center">
+                                    <th>Sr No.</th>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Contact No</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>Registered At </th>
+                                    <th>Action</th>
+                               </tr>
+                               <tr th:each="user,srno : ${users}">
+                                   <td th:text="${srno.count}"></td>
+                                   <td th:text="${user.name}"></td>
+                                   <td th:text="${user.gender}"></td>
+                                   <td th:text="${user.contactNo}"></td>
+                                   <td th:text="${user.email}"></td>
+                                   <td th:text="${user.status}"></td>
+                                   <td th:text="${#temporals.format(user.registerAt,'dd-MM-yyyy, hh:mm a')}"></td>
+                                   <td>
+                                       <a th:href="'UpdateUserStatus/' + ${user.id}" class="btn btn-danger btn-sm" th:if="${user.status.name()=='Disabled'}">Unblock</a>
+                                       <a th:href="'UpdateUserStatus/' + ${user.id}" class="btn btn-success btn-sm" th:if="${user.status.name()=='Verified'}">Block</a>
+                                       <span class="text-danger" th:if="${user.status.name()=='Unverified'}">Not Verified</span>
+                                   </td>
+                                   
+                               </tr>
+                               
+                               <tr th:if="${users.size()==0}" class="text-center">
+                                  <td  colspan="8"> No Data Available</td>
+                               </tr>
+                            </table>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+                 
+            </div>
+      </main>
+   
+   </body>
+</html>

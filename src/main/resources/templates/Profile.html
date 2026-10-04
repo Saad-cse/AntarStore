@@ -1,0 +1,46 @@
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+    <div class="row bg-dark bg-opacity-50 text-center py-5">
+        <h2 class="fw-bold fs-1 py-3">My Profile</h2>
+    </div>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 rounded-0">
+                    <div class="card-body p-4">
+                        <table class="table table-borderless mb-0">
+                            <tr>
+                                <th class="text-uppercase text-muted" style="width:40%">Name</th>
+                                <td th:text="${user.name}"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-uppercase text-muted">Email</th>
+                                <td th:text="${user.email}"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-uppercase text-muted">Contact</th>
+                                <td th:text="${user.contactNo}"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-uppercase text-muted">Gender</th>
+                                <td th:text="${user.gender}"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-uppercase text-muted">Member Since</th>
+                                <td th:text="${#temporals.format(user.registerAt, 'dd MMM yyyy')}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex gap-3 mt-3">
+                    <a href="/address" class="btn btn-outline-dark rounded-0 flex-fill">Delivery Address</a>
+                    <a href="/MyOrders" class="btn btn-outline-dark rounded-0 flex-fill">My Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

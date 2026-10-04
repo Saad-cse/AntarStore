@@ -1,0 +1,151 @@
+<html th:replace="~{base::Layout(~{::main})}">
+    <body>
+       <main>
+           <div class="row bg-dark bg-opacity-50 text-center py-5">
+               <p>Get In Touch </p>
+               <h2 class="fw-bold fs-1 py-3">We'd Love to Hear From You</h2>
+               <p>Whether you have a question about an order, need styling <br>advice, or just want to say hello — our team is here for you.
+           </div>
+           
+           <div class="row py-5">
+               <div class="col-md-7 px-2 p-md-3">
+                   <h2 style="font-weight: bold;">Contact Us</h2>
+                   <div class="card rounded-0 shadow p-2 p-md-4">
+                      <h4 style="font-weight: bold">Send Us a Message</h4>
+                      <p>We'll respond within 24 hours during business days.</p>
+                      <form action="/submitEnquiry" th:object="${dto}" method="post">
+                        <div class="row p-2  ">
+                            <div class="col-md-6 mt-3">
+                                <label class="text-uppercase">Full Name *</label>
+                                <input th:field="${dto.name}" type="text" required class="form-control mt-2 py-2 px-3 rounded-0" placeholder="Your Full Name">
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label class="text-uppercase">Email Address *</label>
+                                <input th:field="${dto.email}" type="email" required class="form-control mt-2 py-2 px-3 rounded-0" placeholder="Your email address">
+                       
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label class="text-uppercase">Contact Number *</label>
+                                <input th:field="${dto.contactNo}" type="number" required class="form-control mt-2 py-2 px-3 rounded-0" placeholder="Your contact number">
+                            </div>
+                            <div class="col-md-6 mt-3">
+                                <label class="text-uppercase">Address *</label>
+                                <input th:field="${dto.address}" type="text"  required class="form-control mt-2 py-2 px-3 rounded-0" placeholder="Your address">
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <label class="text-uppercase">Select Enquiry Type *</label>
+                                <select th:field="${dto.enquiryType}" required class="form-control rounded-0 py-2 px-3 mt-2">
+                                    <option value="" >Select a topic</option>
+                                    <option value="Order Enquiry">Order Enquiry</option>
+                                    <option value="Product Question">Product Question</option>
+                                    <option value="Return/Exchange">Return/Exchange</option>
+                                    <option value="Other">Other</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <label class="text-uppercase">Enter Your Message</label>
+                                <textarea th:field="${dto.message}" required class="rounded-0 mt-2 form-control" placeholder="Tell me how can I help you?"></textarea>
+                            </div>
+                            
+                            <div class="col-md-12 mt-5 text-center">
+                                <button class="btn btn-dark rounded-0">Submit Enquiry</button>
+                            </div>
+                            
+                        </div>
+                      </form>
+
+                      
+                   </div>
+               </div>
+              <div class="col-md-5"> 
+                       <div class="container py-0">
+
+                             <h2 class="fw-semibold mb-3">Our Details</h2>
+
+                              <!-- Address -->
+                               <div class="border rounded p-4 mb-4 d-flex align-items-center">
+                                  <div class="bg-light rounded-circle d-flex justify-content-center align-items-center"
+                                           style="width:30px;height:30px;font-size:18px;">
+                                            &#x1F4CD;
+                                   </div>
+
+                                 <div class="ms-4">
+                                         <h4 class="fw-normal mb-1">Our Studio</h4>
+                                         <p class="text-muted mb-0">
+                                          Lucknow, Uttar Pradesh, India
+                                         </p>
+                                   </div>
+                                </div>
+
+                           <!-- Phone -->
+                                <div class="border rounded p-4 mb-4 d-flex align-items-center">
+                                     <div class="bg-light rounded-circle d-flex justify-content-center align-items-center"
+                                      style="width:30px;height:30px;font-size:18px;">
+                                         	&#9742;
+                                       </div>
+
+                                     <div class="ms-4">
+                                          <h4 class="fw-normal mb-1">Phone & WhatsApp</h4>
+                                           <p class="mb-1">+91 9876543210</p>
+
+                                           <a href="#" class="text-success text-decoration-none fw-semibold">
+                                           <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                                           </a>
+                                     </div>
+                              </div>
+
+                                   <!-- Email -->
+                             <div class="border rounded p-4 mb-4 d-flex align-items-center">
+                                   <div class="bg-light rounded-circle d-flex justify-content-center align-items-center"
+                                    style="width:30px;height:30px;font-size:18px;">
+                                         &#9993;
+                                    </div>
+
+                                   <div class="ms-4">
+                                        <h4 class="fw-normal mb-1">Email</h4>
+                                         <p class="text-muted mb-0">
+                                            contact@example.com
+                                         </p>
+                                    </div>
+                               </div>
+
+                           <!-- Working Hours -->
+                                 <div class="border rounded p-4 d-flex align-items-center">
+                                       <div class="bg-light rounded-circle d-flex justify-content-center align-items-center"
+                                         style="width:30px;height:30px;font-size:18px;">
+                                             &#128339;
+                                         </div>
+
+                                        <div class="ms-4">
+                                              <h4 class="fw-normal mb-2">Working Hours</h4>
+
+                                               <p class="mb-1">
+                                                          Monday - Saturday : 10:00 AM - 7:00 PM
+                                               </p>
+
+                                              <p class="mb-0">
+                                                 Sunday : 11:00 AM - 5:00 PM
+                                                </p>
+                                           </div>
+                                     </div>
+
+                            </div>
+                      </div>
+
+                     
+                      
+                 </div>
+              
+     </div>         
+          
+           
+            <script>
+                  var msg = "[[${msg}]]";
+                  if(msg!=""){
+                	  alert(msg);
+                  }
+            </script>
+       </main>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<html th:replace="~{Admin/Adminbase::layout(~{::main})}">
+   <body>
+      <main>
+            <div class="row">
+               <div class="col-sm-12">
+                  <div class="card shadow">
+                     <div class="card-header bg-primary">
+                           <h4 class="text-white text-center mb-0">Manage Inquiries</h4>
+                     </div>
+                     <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="example">
+                                 <tr>
+                                    <th>Sr.No</th>
+                                    <th>Name</th>
+                                    <th>Contact No</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Inquiry Type</th>
+                                    <th>Message</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                 </tr>
+                                 <tr th:each="enquiry, srno : ${enquiries}">
+                                    <td th:text="${srno.count}" class="text-center"></td>
+                                    <td th:text="${enquiry.name}"></td>
+                                    <td th:text="${enquiry.contactNo}"></td>
+                                    <td th:text="${enquiry.email}"></td>
+                                    <td th:text="${enquiry.address}"></td>
+                                    <td th:text="${enquiry.enquiryType}"></td>
+                                    <td th:text="${enquiry.message}"></td>
+                                    <td th:text="${#temporals.format(enquiry.enquiryAt, 'dd-MM yyyy, hh:mm a')}"></td>
+                                    <td> 
+                                       <a href="#" class="btn btn-danger btn-sm text-white">Delete</a>
+                                    </td>
+                                 </tr>
+                                 
+                            </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </main>
+   
+   </body>
+</html>

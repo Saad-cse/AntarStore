@@ -1,0 +1,174 @@
+*{   
+	margin:0;
+	font-family:poppins;
+}
+
+.nav-bar{
+	height: 70px;
+	background-color: #F5F5F5;
+	display: flex;
+	align-items: center;
+	
+	}
+	
+.logo{
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	margin:10px;
+	margin-left:80px;
+	object-fit:cover;
+}
+
+.nav-brand{
+	 display: flex;
+	 align-items: center;
+	 text-decoration: none;
+	 color: black;
+	
+}
+.nav-menu{
+	display: flex;
+	gap:35px;
+	margin: 160px;
+	padding:0px;
+	justify-content: center;
+}
+.nav-menu  a {
+	text-decoration: none;
+	color: black;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.nav-menu  a:hover{
+	color:#d4a017;
+}
+.icon{
+	display: flex;
+	gap:20px;
+	justify-content: center;
+	margin:200px;
+	padding: 0px;
+}  
+
+.backwidth{
+	width: 30%;
+	padding: 5px;
+}
+     
+ .footer img{
+     
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	margin:10px;
+	margin-left:80px;
+	object-fit:cover;
+	}
+	.footer{
+	color: white;
+	padding: 100px o;
+	height: 500px;
+	} 
+	.footer a{
+    display:block;
+    color:#9b9b9b;
+    text-decoration:none;
+    margin:18px 0;
+    font-size:18px;
+}
+
+   .footer a:hover{
+    color:white;
+    }
+	.footer-title{
+    color:white;
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.banner{
+    
+    align-items: start;
+    width: 80%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid black;
+  
+}
+
+/*feature section*/
+.heading p{
+    text-align: center;
+    font-size: 13px;
+    margin: 0px;
+}
+.heading h1{
+    text-align: center;
+    font-size: 35px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 10px;
+}
+.featurecard p{
+    font-size: 13px;
+    margin: 0px;
+}
+.featured{
+	
+	height: 600px;
+}
+.featured h5{
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+.featuredis{
+    top: 10px;
+    left: 10px;
+}
+.featurecard:hover{
+    transform: scale(1.05);
+    transition: 2s;
+}
+.featurecard{
+    transition: 2s;
+}
+
+/* story section*/
+.story{
+	padding: 80px;
+	height: 600px;
+	
+	min-height: 100vh;
+}
+.story img{
+	height: 500px;
+}
+.firstpara{
+	padding-top:125px;
+	font-size: 13px;
+	font-weight:bold;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	margin: 0px;
+	
+}
+
+.story h1{
+	 
+    font-size: 55px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.secondpara{
+	font-size: 13px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight:bold;
+}
+

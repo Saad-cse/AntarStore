@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" th:fragment="Layout(content)">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AntarStore</title>
+    <link rel="icon" th:href="@{/images/antar-logo.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link  rel="stylesheet" th:href="@{/css/cart.css}">
+    <link  rel="stylesheet" th:href="@{/css/antar-theme.css}">
+  </head>
+  <body>
+       <div class="container-fluid">
+           <!-- Header Section -->
+           <div class="row sticky-top ">
+              <div class="nav-bar ">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                  <img class="logo brand-logo"  alt="AntarStore" th:src="@{/images/antar-logo.png}">
+
+                     <div class="ms-2">
+                       <h2 class="m-0 brand-word">AntarStore</h2>
+                       <small class="brand-tagline">PREMIUM FASHION</small>
+                    </div>
+                 </a> 
+                 <div class="nav-menu">
+               
+                    <a href="/">HOME</a>
+                    <a href="/shop">SHOP</a>
+                    <a href="/blog">BLOG</a>
+                    <a href="/about">ABOUT</a>
+                    <a href="/ContactUs">CONTACT Us</a>
+                    <a href="/Login" th:if="${session.loggedInUser == null}">LOGIN</a>
+                    <a href="/Register" th:if="${session.loggedInUser == null}">REGISTER</a>
+                    <div  class="nav-item dropdown " th:if="${session.loggedInUser != null}">
+                        <a class="nav-link dropdown-toggle fs-6" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            User
+                        </a>  
+                        <ul class="dropdown-menu w-50 list-unstyled">
+                           <li><a class="dropdown-item" href="/Profile">My Profile</a></li>
+                           <li><a class="dropdown-item" href="/MyOrders">My Orders</a></li>
+                           <li><a class="dropdown-item" href="/address">Saved Address</a></li>
+                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </div>                      
+                  
+                 </div>
+                 
+                    <div class="icon me-5">
+                    <!--  <input type="text" id="search-box"  class="search-box" placeholder="Search product & categories...">-->
+                    <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <a href="/cart" class="text-dark"> <i class="fa-solid fa-cart-flatbed"></i></a>
+                    
+                </div>
+                 
+             </div>
+            
+                       
+        </div>
+           
+           
+           <!--Main section  -->
+           <div class="main" th:replace="${content}">
+           
+           </div>
+           
+           <!-- Footer Section -->
+           
+           <div class="row footer bg-dark py-5">
+               <div class="container">
+                   <div class="row">
+                      <div class="col-md-3 py-3 ">
+                         <img alt="AntarStore" class="footer-logo" th:src="@{/images/antar-logo.png}">
+                         <p style="color: white;">Original pieces, thoughtfully made — the AntarStore edit for this season.</p>
+                         <div class="d-flex justify-content-center gap-3 mt-3">
+                           <a href="#"><i class="fa-brands fa-instagram"></i></a>                         
+                           <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                           <a href="#"><i class="fa-brands fa-pinterest"></i></a> 
+                           <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                         </div>
+                      </div>
+                      <div class="col-md-3 py-3 ">
+                           <p class="footer-title">SHOP</p>
+                           <a href="/shop" class="d-block py-2">All Products</a>
+                           <a href="/shop" class="d-block py-2">New Arrivals</a>
+                           <a href="/shop" class="d-block py-2">Shirts</a>
+                           <a href="/shop" class="d-block  py-2">Ethnic Wear</a>
+                           <a href="/shop"class="d-block py-2">Knitwear</a>
+                      </div>
+                      <div class="col-md-3 py-3">
+                           <p class="footer-title">HELP</p>
+                           <a href="/about" class="d-block py-2">About Us</a>
+                           <a href="/ContactUs" class="d-block py-2">Shipping Info</a>
+                           <a href="/ContactUs" class="d-block py-2">Return Policy</a>
+                           <a href="/ContactUs" class="d-block py-2">Contact Us</a>
+                           <a href="/ContactUs" class="d-block py-2">FAQ</a>
+              
+                       </div>
+                       <div class="col-md-3 py-3">
+                          <p class="footer-title"> NEWSLETTER</p> 
+                          <span >Get exclusive access to new arrivals,style tips,and member</span>
+                          <span>only offers.</span>
+                          <input type="email" class="form-control mt-3 text-center" placeholder="your@email.com">
+                          <button class="btn btn-light w-100 mt-3">SUBSCRIBE</button>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+         </div>  
+          <!--   <div class=" row py-5 my-5">
+               <div class="footer">
+               
+                   <div class="footer-box">
+                      <img alt="logo" src="/images/logo.png">
+                      <p>Our most-loved pieces ,created by our stylists for the season.</p>
+                      <div class="social-box">
+                         <a href="#"><i class="fa-brands fa-instagram"></i></a>                         
+                         <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                         <a href="#"><i class="fa-brands fa-pinterest"></i></a> 
+                         <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                         
+                      </div>
+                   </div>
+                  <div>
+                    <p>SHOP</p>
+                    <a href="#">All Products</a>
+                    <a href="#">New Arrivals</a>
+                    <a href="#">Shirts</a>
+                    <a href="#">Ethnic Wear</a>
+                    <a href="#">Knitwear</a>
+                  </div>
+                  
+                  <div>
+                    <p>HELPS</p>
+                    <a href="#">About Us</a>
+                    <a href="#">Shipping Info</a>
+                     <a href="#">Return Policy</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                  </div>
+                  
+                  <div class="newsletter">
+                    <p>NEWSLETTER</p> 
+                    <span style="color :grey">Get exclusive access to new arrivals,style tips,and member</span>
+                    <span style="color:grey">only offers.</span>
+                    <input type="email" placeholder="your@email.com">
+                    <button>SUBSCRIBE</button>
+                    
+                  </div>
+                  
+                 
+               </div>
+                              
+           </div>  -->
+          
+            
+       
+                  																
+       
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    </body>
+</html>

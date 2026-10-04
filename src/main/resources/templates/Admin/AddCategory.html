@@ -1,0 +1,54 @@
+<html th:replace="~{Admin/Adminbase::layout(~{::main})}">
+   <body>
+      <main>
+         
+            <div class="row">
+               <div class="col-sm-10 mx-auto">
+                   <div class="card shadow">
+                      <div class="card-header bg-success text-white">
+                            Add Product Category
+                      </div>
+                      <div class="card-body">
+                         <form action="AddCategory" method="post" th:object="${dto}">
+                             <div class="d-flex">
+                                 <input type="text" name="categoryName" placeholder="Category Name...." class="form-control" required>
+                                 <input type="text" name="categoryIcon" placeholder="Category Icon(font awesome)...." class="form-control mx-2"  required>
+                                 <button type="submit" class="btn btn-success px-5 ">Add</button>
+                             </div>
+                         </form>
+                      </div>
+                   </div>
+               </div>
+               <div class="col-sm-10 mx-auto mt-3">
+                  <div class="card-shadow">
+                     <div class="card-header bg-success text-white">
+                        Manage product categories
+                     </div>
+                     <div class="card-body">
+                        <div class="table table-responsive">
+                           <table class="table table-bordered">
+                               <tr>
+                                 <th>sr.no. </th>
+                                 <th>Category Name</th>
+                                 <th>Category Icon</th>
+                                 <th>Visibility</th>
+                                 </tr>
+                                 
+                                 <tr th:each="category, srno:${categories}">
+                                     <td th:text="${srno.count}"></td>
+                                     <td th:text="${category.categoryName}"></td>
+                                     <td th:text="${category.categoryIcon}"></td>
+                                     <td th:text="${category.isVisible}"></td>
+                                 
+                                 </tr>
+                                 
+                            </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </main>
+   
+   </body>
+</html>

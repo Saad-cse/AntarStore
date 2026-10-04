@@ -1,0 +1,611 @@
+<html th:replace="~{base::Layout(~{::main})}">
+     <body>
+          <main>
+           <style>
+/* ==============================
+        PRODUCT PAGE
+================================*/
+
+.vpd-page{
+    background:#2a2a2a;
+    min-height:100vh;
+}
+
+/* ==============================
+        Breadcrumb
+================================*/
+
+.vpd-breadcrumb{
+    font-size:15px;
+}
+
+.vpd-breadcrumb a{
+    color:#777;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.vpd-breadcrumb a:hover{
+    color:#D4AF37;
+}
+
+.vpd-breadcrumb .active{
+    color:#D4AF37;
+    font-weight:600;
+}
+
+
+/* ==============================
+        Gallery
+================================*/
+
+.vpd-gallery-wrapper{
+    background:#2a2a2a;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.vpd-main-image-box{
+    overflow:hidden;
+    border-radius:15px;
+    
+}
+
+.vpd-main-image-box img{
+	width:auto;
+	height:500px;
+	   object-fit:cover;
+	   border-radius:12px;
+    transition:.5s;
+}
+
+.vpd-main-image-box:hover img{
+    transform:scale(1.08);
+}
+
+.vpd-thumb-image{
+
+    width:100%;
+    height:120px;
+    object-fit:cover;
+
+    cursor:pointer;
+
+    border-radius:12px;
+
+    transition:.35s;
+}
+
+.vpd-thumb-image:hover{
+
+    transform:translateY(-4px);
+
+    border:2px solid #D4AF37;
+
+}
+
+/* ==============================
+        Right Section
+================================*/
+
+.vpd-details-card{
+
+    background:#1e1e1e;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:90px;
+	height:auto;
+	   align-self:flex-start;
+	color:#777 ;
+
+}
+
+/* Category */
+
+.vpd-category-tag{
+
+    display:inline-block;
+
+    background:#D4AF37;
+
+    color:#fff;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* Product Title */
+
+.vpd-product-title{
+
+    font-size:25px;
+
+    font-weight:700;
+
+    color:#777;
+
+	height:auto;
+	   align-self:flex-start;
+
+}
+
+/* Brand */
+
+.vpd-brand-text{
+
+    color:#777;
+
+    font-size:16px;
+
+    margin-bottom:10px;
+
+}
+
+.vpd-brand-text strong{
+
+    color:#777;
+
+}
+
+/* Price */
+
+.vpd-price-box{
+
+    display:flex;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.vpd-final-price{
+
+    color:#D4AF37;
+
+    font-size:20px;
+
+    font-weight:500;
+
+}
+
+.vpd-old-price{
+
+    text-decoration:line-through;
+
+    color:#999;
+
+    font-size:22px;
+
+}
+
+/* ==============================
+        Feature Cards
+================================*/
+
+.vpd-feature-card{
+
+    background:#1e1e1e;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    padding:20px;
+
+    border:1px solid #eee;
+
+    transition:.35s;
+
+}
+
+.vpd-feature-card i{
+
+    color:#D4AF37;
+
+}
+
+.vpd-feature-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+
+}
+
+/*==================================
+        BUTTONS
+==================================*/
+
+.vpd-details-card .btn{
+    border-radius:12px;
+    padding:14px;
+    font-weight:600;
+    transition:.35s;
+}
+
+.vpd-details-card .btn-warning{
+    background:#D4AF37;
+    border-color:#D4AF37;
+    color:#fff;
+}
+
+.vpd-details-card .btn-warning:hover{
+    background:#bf9824;
+    border-color:#bf9824;
+    transform:translateY(-3px);
+}
+
+.vpd-details-card .btn-outline-light{
+    border:2px solid #444;
+    color:#222;
+}
+
+.vpd-details-card .btn-outline-light:hover{
+    background:#222;
+    color:#fff;
+}
+
+.vpd-details-card .btn-outline-warning{
+    border:2px solid #D4AF37;
+    color:#D4AF37;
+}
+
+.vpd-details-card .btn-outline-warning:hover{
+    background:#D4AF37;
+    color:#fff;
+}
+
+
+
+
+</style>
+<section class="vpd-page py-5">
+
+    <div class="container">
+
+        <!-- Breadcrumb -->
+
+        <nav aria-label="breadcrumb" class="mb-4">
+
+            <ol class="breadcrumb vpd-breadcrumb">
+
+                <li class="breadcrumb-item">
+                    <a th:href="@{/}">Home</a>
+                </li>
+
+                <li class="breadcrumb-item">
+                    <a th:href="@{/shop}">Shop</a>
+                </li>
+
+                <!-- FIXED: Added null check for category -->
+                <li class="breadcrumb-item"
+                    th:text="${product?.category?.categoryName} ?: 'Uncategorized'">
+                    Category
+                </li>
+
+                <li class="breadcrumb-item active"
+                    th:text="${product?.productName} ?: 'Product'">
+                    Product
+                </li>
+
+            </ol>
+
+        </nav>
+
+        <div class="row g-5">
+
+            <!-- ================= LEFT IMAGE SECTION ================= -->
+
+            <div class="col-lg-6">
+
+                <div class="vpd-gallery-wrapper">
+
+                    <!-- Main Image -->
+                    <div class="vpd-main-image-box">
+                        <!-- FIXED: Added null check for productImages -->
+                        <img id="vpdMainImage"
+                             class="img-fluid rounded shadow"
+                             th:if="${product != null and product.productImages != null and !product.productImages.isEmpty()}"
+                             th:src="@{'/ProductImages/'+${product.productImages.get(0)}}"
+                             alt="Product Image">
+                        
+                        <!-- Fallback image if no product images -->
+                        <img id="vpdMainImage"
+                             class="img-fluid rounded shadow"
+                             th:unless="${product != null and product.productImages != null and !product.productImages.isEmpty()}"
+                             src="/images/no-image.png"
+                             alt="No Image Available">
+                    </div>
+
+                    <!-- Thumbnail Gallery -->
+                    <div class="row mt-3 g-3" th:if="${product != null and product.productImages != null and !product.productImages.isEmpty()}">
+                        <div class="col-3"
+                             th:each="img : ${product.productImages}">
+
+                            <img class="img-fluid rounded border vpd-thumb-image"
+                                 th:src="@{'/ProductImages/'+${img}}"
+                                 onclick="changeImage(this)"
+                                 alt="Thumbnail">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PRODUCT DETAILS ================= -->
+
+            <div class="col-lg-6">
+
+                <div class="vpd-details-card">
+
+                    <!-- Category -->
+                    <!-- FIXED: Added null check for category -->
+                    <span class="vpd-category-tag"
+                          th:text="${product?.category?.categoryName} ?: 'Uncategorized'">
+                    </span>
+
+                    <!-- Product Name -->
+                    <h2 class="vpd-product-title mt-2"
+                        th:text="${product?.productName} ?: 'Product Name Not Available'">
+                    </h2>
+
+                    <!-- Brand -->
+                    <p class="vpd-brand-text">
+                        Brand :
+                        <strong th:text="${product?.brandName} ?: 'N/A'"></strong>
+                    </p>
+
+                    <!-- Gender -->
+                    <p class="vpd-brand-text">
+                        Gender :
+                        <strong th:text="${product?.gender} ?: 'N/A'"></strong>
+                    </p>
+
+                    <!-- Rating -->
+                    <div class="mb-3">
+
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+
+                        <span class="text-muted ms-2">
+                            Premium Quality
+                        </span>
+
+                    </div>
+
+                    <!-- Price -->
+                    <div class="vpd-price-box mb-4">
+
+                        <span class="vpd-final-price">
+
+                            ₹<span th:text="${product?.finalprice} ?: '0.00'"></span>
+
+                        </span>
+
+                        <span class="vpd-old-price ms-3">
+
+                            ₹<span th:text="${product?.sellingPrice} ?: '0.00'"></span>
+
+                        </span>
+
+                        <span class="badge bg-danger ms-3"
+                              th:text="${product?.discount != null ? product.discount + '% OFF' : '0% OFF'}">
+                        </span>
+
+                    </div>
+
+                    <!-- Stock -->
+                    <div class="mb-4">
+
+                        <span class="badge bg-success px-3 py-2"
+                              th:if="${product != null and product.status != null and product.status.name()=='Available'}">
+
+                            In Stock
+
+                        </span>
+
+                        <span class="badge bg-danger px-3 py-2"
+                              th:unless="${product != null and product.status != null and product.status.name()=='Available'}">
+
+                            Out of Stock
+
+                        </span>
+
+                    </div>
+					
+					<!-- Quantity -->
+                    <div class="mb-3">
+
+                        <strong>Available Quantity :</strong>
+
+                        <span th:text="${product?.quantity} ?: '0'"></span>
+
+                    </div>
+
+					
+					<form th:action="@{/addToCart}"
+					      method="post"
+					      th:if="${product != null and product.quantity != null and product.quantity > 0}">
+
+					    <input type="hidden"
+					           name="productId"
+					           th:value="${product.id}">
+
+					   <div class="d-flex">
+						<!-- Size -->
+
+						    <select name="size" class="form-select mb-3 mx-2" th:if="${product.sizes != null}">
+
+						        <option
+						            th:each="size : ${#strings.arraySplit(product.sizes,',')}"
+						            th:value="${size}"
+						            th:text="${size}">
+						        </option>
+
+						    </select>
+						    
+						    <select name="size" class="form-select mb-3 mx-2" th:unless="${product.sizes != null}">
+						        <option value="N/A">N/A</option>
+						    </select>
+
+						    <!-- Color -->
+
+						    <select name="color" class="form-select mb-3 mx-2" th:if="${product.colors != null}">
+
+						        <option
+						            th:each="color : ${#strings.arraySplit(product.colors,',')}"
+						            th:value="${color}"
+						            th:text="${color}">
+						        </option>
+
+						    </select>
+						    
+						    <select name="color" class="form-select mb-3 mx-2" th:unless="${product.colors != null}">
+						        <option value="N/A">N/A</option>
+						    </select>
+						
+					   </div>
+
+
+					    <button class="btn btn-warning btn-lg w-100">
+
+					        <i class="bi bi-cart-plus"></i>
+
+					        Add To Cart
+
+					    </button>
+
+					</form>
+					
+					<!-- Out of stock message -->
+					<div th:if="${product != null and (product.quantity == null or product.quantity <= 0)}" class="alert alert-warning">
+					    <i class="bi bi-exclamation-triangle"></i>
+					    This item is currently out of stock.
+					</div>
+					
+					<!-- Display message if product is null -->
+					<div th:if="${product == null}" class="alert alert-danger">
+					    <i class="bi bi-exclamation-triangle"></i>
+					    Product not found. Please try again.
+					</div>
+					
+                    <!-- Shipping -->
+                    <div class="row g-3 my-4">
+
+                        <div class="col-md-4">
+
+                            <div class="vpd-feature-card">
+
+                                <i class="bi bi-truck fs-3"></i>
+
+                                <h6 class="mt-2">
+
+                                    Shipping
+
+                                </h6>
+
+                                <p class="mb-0">
+
+                                    ₹<span th:text="${product?.shippingCharge} ?: '0.00'"></span>
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="vpd-feature-card">
+
+                                <i class="bi bi-clock-history fs-3"></i>
+
+                                <h6 class="mt-2">
+
+                                    Delivery
+
+                                </h6>
+
+                                <p class="mb-0"
+                                   th:text="${product?.deliveryTime} ?: 'N/A'">
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="vpd-feature-card">
+
+                                <i class="bi bi-arrow-repeat fs-3"></i>
+
+                                <h6 class="mt-2">
+
+                                    Return
+
+                                </h6>
+
+                                <p class="mb-0"
+                                   th:text="${product?.returnPolicy != null and product.returnPolicy ? 'Available' : 'Not Available'}">
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+    // Change Main Image
+
+function changeImage(img) {
+
+    const mainImage = document.getElementById("vpdMainImage");
+
+    mainImage.src = img.src;
+
+    document.querySelectorAll(".vpd-thumb-image").forEach(item => {
+
+        item.classList.remove("vpd-thumb-active");
+
+    });
+
+    img.classList.add("vpd-thumb-active");
+
+}
+</script>
+          </main>
+     </body>
+</html>

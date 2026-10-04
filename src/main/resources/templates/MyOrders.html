@@ -1,0 +1,51 @@
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+    <div class="row bg-dark bg-opacity-50 text-center py-5">
+        <h2 class="fw-bold fs-1 py-3">My Orders</h2>
+    </div>
+
+    <div class="container my-5">
+
+        <div th:if="${#lists.isEmpty(orders)}" class="text-center py-5">
+            <p class="fs-5">You haven't placed any orders yet.</p>
+            <a href="/shop" class="btn btn-dark rounded-0 px-4">Start Shopping</a>
+        </div>
+
+        <div class="table-responsive" th:unless="${#lists.isEmpty(orders)}">
+            <table class="table align-middle">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Product</th>
+                        <th>Variant</th>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                        <th>Order Status</th>
+                        <th>Payment</th>
+                        <th>Placed On</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order : ${orders}">
+                        <td th:text="${order.orderId}"></td>
+                        <td th:text="${order.productName}"></td>
+                        <td th:text="${order.color + ' / ' + order.size}"></td>
+                        <td th:text="${order.quantity}"></td>
+                        <td th:text="'₹' + ${order.totalAmount}"></td>
+                        <td>
+                            <span class="badge bg-dark" th:text="${order.orderStatus}"></span>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary" th:text="${order.paymentStatus}"></span>
+                        </td>
+                        <td th:text="${#temporals.format(order.orderedAt, 'dd MMM yyyy, hh:mm a')}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>
