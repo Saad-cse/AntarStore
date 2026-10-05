@@ -84,6 +84,9 @@ public class MainController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
+	private com.project.antarstore.Repository.WishlistRepo wishlistRepo;
+
 	private Users currentUser() {
 		return (Users) session.getAttribute("loggedInUser");
 	}
@@ -104,15 +107,21 @@ public class MainController {
 	}
 
 	@GetMapping("/shop")
-	public String showShop(@RequestParam(value = "id", required = false) Long id, Model model) {
+	public String showShop(@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "q", required = false) String q, Model model) {
 
 		List<Category> categories = categoryRepo.findAllByIsVisible(true);
 		model.addAttribute("categories", categories);
+		model.addAttribute("q", q);
 
 		// FIX (recovery audit F-14): the shop listing previously returned every
 		// product regardless of admin visibility. Only show products the admin
 		// has marked visible.
-		if (id == null) {
+		if (org.springframework.util.StringUtils.hasText(q)) {
+			// Text search takes priority over a category filter.
+			List<Products> products = productRepo.findAllByVisibilityTrueAndProductNameContainingIgnoreCase(q.trim());
+			model.addAttribute("products", products);
+		} else if (id == null) {
 			List<Products> products = productRepo.findAllByVisibilityTrue();
 			model.addAttribute("products", products);
 		} else {
@@ -562,6 +571,46 @@ public class MainController {
 		List<Orders> orders = orderRepo.findAllByUsersOrderByOrderedAtDesc(user);
 		model.addAttribute("orders", orders);
 		return "MyOrders";
+	}
+
+	@GetMapping("/Wishlist")
+	public String wishlist(Model model) {
+		Users user = currentUser();
+		if (user == null) {
+			return "redirect:/Login";
+		}
+		model.addAttribute("items", wishlistRepo.findAllByUser(user));
+		return "Wishlist";
+	}
+
+	@PostMapping("/wishlist/toggle/{productId}")
+	public String toggleWishlist(@PathVariable("productId") long productId, HttpServletRequest request) {
+		Users user = currentUser();
+		if (user == null) {
+			return "redirect:/Login";
+		}
+
+		Optional<Products> productOpt = productRepo.findById(productId);
+		if (productOpt.isPresent()) {
+			Products product = productOpt.get();
+			var existing = wishlistRepo.findByUserAndProduct(user, product);
+			if (existing.isPresent()) {
+				wishlistRepo.delete(existing.get());
+			} else {
+				com.project.antarstore.Model.Wishlist w = new com.project.antarstore.Model.Wishlist();
+				w.setUser(user);
+				w.setProduct(product);
+				wishlistRepo.save(w);
+			}
+		}
+
+		String referer = request.getHeader("referer");
+		return "redirect:" + (referer != null ? referer : "/Wishlist");
+	}
+
+	@GetMapping("/FAQ")
+	public String faq() {
+		return "FAQ";
 	}
 
 	@GetMapping("/Profile")

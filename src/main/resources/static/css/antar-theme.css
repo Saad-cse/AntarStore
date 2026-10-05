@@ -8,13 +8,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
+/* Palette v2 - a more deliberate "premium Indian couture" story instead of a
+   flat beige. True near-black ink (cooler, not muddy-brown), a crisp ivory
+   background instead of a warm beige one, one consistent metallic gold
+   (matching the gold already used on the cart page, #D4AF37, so the whole
+   site reads as one brand instead of two slightly-different golds), and a
+   deep wine jewel tone as the "exotic" second accent - used sparingly, on
+   badges and highlights, not as a dominant color. */
 :root{
-  --antar-ink:#1c1a17;
-  --antar-charcoal:#2a2a2a;
-  --antar-cream:#faf7f2;
-  --antar-gold:#c9a24b;
-  --antar-gold-deep:#a9822f;
-  --antar-muted:#7a7570;
+  --antar-ink:#100e0c;
+  --antar-charcoal:#241f1a;
+  --antar-cream:#faf9f6;
+  --antar-gold:#D4AF37;
+  --antar-gold-deep:#a9822a;
+  --antar-wine:#6e1f33;
+  --antar-wine-deep:#511727;
+  --antar-muted:#716b63;
 }
 
 body{
@@ -108,9 +117,10 @@ h1,h2,h3,h4,
   transition:transform .25s ease, box-shadow .25s ease;
 }
 
-/* ---------- Footer ---------- */
+/* ---------- Footer (always dark, regardless of the light/dark toggle -
+   matches the same warm ink family used everywhere else) ---------- */
 .footer{
-  background:linear-gradient(180deg,#1c1a17,#111111) !important;
+  background:linear-gradient(180deg,var(--antar-ink),#0a0806) !important;
 }
 .footer-title{
   color:var(--antar-gold);
@@ -119,6 +129,440 @@ h1,h2,h3,h4,
   font-size:13px;
   text-transform:uppercase;
 }
+
+/* ---------- Dark/light sliding toggle switch ---------- */
+.antar-theme-switch{
+  position:relative;
+  display:inline-flex;
+  width:52px;
+  height:28px;
+  cursor:pointer;
+  flex:none;
+}
+.antar-theme-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+  position:absolute;
+}
+.antar-theme-track{
+  position:absolute;
+  inset:0;
+  background:#e7e2d8;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.08);
+  transition:background .25s ease;
+}
+.antar-theme-thumb{
+  position:absolute;
+  top:2px;
+  left:2px;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:#1c1a17;
+  color:#f4c430;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  transition:left .25s ease, background .25s ease, color .25s ease;
+}
+.antar-theme-switch input:checked + .antar-theme-track{
+  background:#1c1a17;
+}
+.antar-theme-switch input:checked + .antar-theme-track .antar-theme-thumb{
+  left:28px;
+  background:#f4c430;
+  color:#1c1a17;
+}
+
+/* ---------- New two-row navbar ---------- */
+.antar-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 32px;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.antar-topbar-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.antar-text-link{
+  color:var(--antar-ink);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.5px;
+  margin-right:6px;
+}
+.antar-text-link:hover{ color:var(--antar-gold-deep); }
+
+.antar-icon-btn{
+  width:38px;
+  height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  border:1px solid rgba(0,0,0,.12);
+  background:transparent;
+  color:var(--antar-ink);
+  text-decoration:none;
+  font-size:15px;
+  transition:.2s ease;
+  position:relative;
+}
+.antar-icon-btn:hover{
+  background:var(--antar-ink);
+  color:#fff;
+  border-color:var(--antar-ink);
+}
+.antar-icon-badge{ position:relative; }
+.antar-badge{
+  position:absolute;
+  top:-4px;
+  right:-4px;
+  background:var(--antar-gold-deep);
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  min-width:17px;
+  height:17px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 4px;
+}
+
+.antar-search-row{
+  padding:14px 32px;
+  background:rgba(255,255,255,.98);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.antar-search-form{
+  max-width:520px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(0,0,0,.15);
+  border-radius:999px;
+  padding:8px 18px;
+  background:#fff;
+}
+.antar-search-form input{
+  border:none;
+  outline:none;
+  flex:1;
+  font-size:14px;
+  background:transparent;
+  color:var(--antar-ink);
+}
+
+.antar-pillbar{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  padding:12px 20px;
+  background:var(--antar-cream);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.antar-pill{
+  padding:8px 20px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,.15);
+  color:var(--antar-ink);
+  text-decoration:none;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.5px;
+  background:#fff;
+  transition:.2s ease;
+}
+.antar-pill:hover{
+  background:var(--antar-ink);
+  color:#fff;
+  border-color:var(--antar-ink);
+}
+
+/* ---------- Dark mode ----------
+   One warm "espresso" near-black family used everywhere, instead of two
+   different dark tones drifting apart across pages (this was exactly the
+   bug: the homepage's body background and the auth page's panel background
+   had become two separate hardcoded hex values that fell out of sync, one
+   warm/brown, one cool/charcoal). Every dark surface below is now either
+   --antar-surface-dark itself or a deliberate tint/shade of it, all sharing
+   the same warm hue instead of mixing warm and cool blacks. */
+html[data-theme="dark"]{
+  --antar-cream:#19140f;        /* canonical page background */
+  --antar-surface-dark:#19140f;
+  --antar-surface-dark-deep:#0e0b08;  /* pillbar / footer - one step darker */
+  --antar-surface-dark-raised:#261f17; /* cards / inputs - one step lighter, for subtle elevation */
+}
+html[data-theme="dark"] body{
+  background:var(--antar-surface-dark);
+  color:#f3ede3;
+}
+html[data-theme="dark"] .antar-topbar,
+html[data-theme="dark"] .antar-search-row{
+  background:rgba(25,20,15,.95);
+  border-bottom-color:rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .antar-pillbar{
+  background:var(--antar-surface-dark-deep);
+  border-bottom-color:rgba(255,255,255,.08);
+}
+html[data-theme="dark"] .antar-pill{
+  background:var(--antar-surface-dark-raised);
+  color:#f3ede3;
+  border-color:rgba(255,255,255,.12);
+}
+html[data-theme="dark"] .brand-word,
+html[data-theme="dark"] .antar-text-link,
+html[data-theme="dark"] .antar-icon-btn{
+  color:#f3ede3;
+}
+html[data-theme="dark"] .antar-icon-btn{
+  border-color:rgba(255,255,255,.18);
+}
+html[data-theme="dark"] .antar-search-form{
+  background:var(--antar-surface-dark-raised);
+  border-color:rgba(255,255,255,.15);
+}
+html[data-theme="dark"] .antar-search-form input{
+  color:#f3ede3;
+}
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .bg-white,
+html[data-theme="dark"] .bg-light{
+  background-color:var(--antar-surface-dark-raised) !important;
+  color:#f3ede3 !important;
+}
+html[data-theme="dark"] .footer{
+  background:linear-gradient(180deg,var(--antar-surface-dark),var(--antar-surface-dark-deep)) !important;
+}
+
+/* ---------- Exotic accent: wine badges (discount tags etc.) replacing
+   Bootstrap's default bright red/blue, which clashed with the gold/charcoal
+   palette ---------- */
+.antar-badge-wine{
+  background:var(--antar-wine) !important;
+  color:#f3e7ea !important;
+  border:none;
+}
+.antar-badge-ink{
+  background:var(--antar-ink) !important;
+  color:var(--antar-gold) !important;
+  border:none;
+}
+
+/* ---------- Trust note text under the payment button (was Bootstrap's
+   .text-muted - a mid-gray that was nearly invisible against the cart
+   page's summary card, which is always dark regardless of the site-wide
+   light/dark toggle - see cart.css). Kept light regardless of theme since
+   the card it sits on doesn't change color with the toggle. ---------- */
+.antar-trust-note{
+  color:#cfc9bd !important;
+  font-size:13px;
+}
+
+/* ---------- Auth pages (Login / Register) ---------- */
+.antar-auth-wrap{
+  min-height:calc(100vh - 220px);
+  display:flex;
+  align-items:stretch;
+}
+.antar-auth-image{
+  flex:1 1 48%;
+  position:relative;
+  min-height:520px;
+  background-size:cover;
+  background-position:center;
+  display:none;
+}
+@media (min-width:900px){
+  .antar-auth-image{ display:block; }
+}
+.antar-auth-image::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(23,18,12,.05) 0%, rgba(23,18,12,.75) 100%);
+}
+.antar-auth-image-caption{
+  position:absolute;
+  left:36px;
+  right:36px;
+  bottom:36px;
+  color:#fff;
+  z-index:2;
+}
+.antar-auth-image-caption .eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  opacity:.85;
+}
+.antar-auth-image-caption h2{
+  font-family:'Playfair Display', Georgia, serif;
+  font-size:2rem;
+  margin:6px 0 10px;
+}
+.antar-auth-image-caption p{
+  font-size:13.5px;
+  opacity:.85;
+  max-width:360px;
+  margin:0;
+}
+
+.antar-auth-panel{
+  flex:1 1 52%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:48px 24px;
+  background:var(--antar-cream);
+}
+.antar-auth-card{
+  width:100%;
+  max-width:440px;
+}
+.antar-auth-card .eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:11px;
+  color:var(--antar-gold-deep);
+  font-weight:700;
+}
+.antar-auth-card h1{
+  font-family:'Playfair Display', Georgia, serif;
+  font-size:2.1rem;
+  margin:6px 0 8px;
+}
+.antar-auth-sub{
+  color:var(--antar-muted);
+  font-size:14px;
+  margin-bottom:24px;
+}
+
+.antar-auth-tabs{
+  display:flex;
+  border-radius:999px;
+  background:rgba(0,0,0,.05);
+  padding:4px;
+  margin-bottom:28px;
+}
+.antar-auth-tabs a{
+  flex:1;
+  text-align:center;
+  padding:9px 0;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.5px;
+  text-decoration:none;
+  color:var(--antar-ink);
+}
+.antar-auth-tabs a.active{
+  background:var(--antar-ink);
+  color:#fff;
+}
+
+.antar-field{ margin-bottom:18px; }
+.antar-field label{
+  display:block;
+  font-size:11.5px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--antar-muted);
+  margin-bottom:6px;
+}
+.antar-field input,
+.antar-field select{
+  width:100%;
+  border:none;
+  border-bottom:1.5px solid rgba(0,0,0,.18);
+  background:transparent;
+  padding:8px 2px;
+  font-size:15px;
+  color:var(--antar-ink);
+  outline:none;
+  transition:border-color .2s ease;
+}
+.antar-field input:focus,
+.antar-field select:focus{
+  border-bottom-color:var(--antar-gold-deep);
+}
+.antar-field-pass{ position:relative; }
+.antar-field-pass button{
+  position:absolute;
+  right:0;
+  bottom:8px;
+  border:none;
+  background:none;
+  color:var(--antar-muted);
+  font-size:14px;
+}
+.antar-strength{
+  height:3px;
+  border-radius:2px;
+  background:rgba(0,0,0,.08);
+  margin-top:8px;
+  overflow:hidden;
+}
+.antar-strength-bar{
+  height:100%;
+  width:0%;
+  background:#c0392b;
+  transition:width .2s ease, background .2s ease;
+}
+
+.antar-auth-submit{
+  width:100%;
+  background:var(--antar-ink);
+  color:#fff;
+  border:none;
+  border-radius:999px;
+  padding:13px 0;
+  font-weight:700;
+  letter-spacing:.5px;
+  margin-top:6px;
+  transition:.2s ease;
+}
+.antar-auth-submit:hover{ background:#000; }
+
+.antar-alert{
+  border-radius:10px;
+  padding:12px 16px;
+  font-size:13.5px;
+  margin-bottom:20px;
+  background:#fdecea;
+  color:#7a1f14;
+  border:1px solid #f3c6c0;
+}
+
+/* NOTE: .antar-auth-panel deliberately has no separate dark-mode override
+   here. Its base rule (above) is `background: var(--antar-cream)`, which
+   already picks up the dark-mode value redefined on :root. A second
+   hardcoded hex here previously drifted out of sync with the rest of the
+   page and was exactly the cause of the brown-vs-charcoal mismatch between
+   the auth pages and the homepage. */
+html[data-theme="dark"] .antar-field label{ color:#c8bfae; }
+html[data-theme="dark"] .antar-field input,
+html[data-theme="dark"] .antar-field select{
+  color:#f1ece3;
+  border-bottom-color:rgba(255,255,255,.2);
+}
+html[data-theme="dark"] .antar-field select option{ color:#000; }
+html[data-theme="dark"] .antar-auth-tabs{ background:rgba(255,255,255,.08); }
+html[data-theme="dark"] .antar-auth-tabs a{ color:#f1ece3; }
 
 /* ---------- Small utility ---------- */
 .rounded-0{ border-radius:0 !important; }

@@ -15,4 +15,6 @@ public interface ProductRepo extends JpaRepository<Products, Long>{
 
 	List<Products> findAllByCategoryAndVisibilityTrue(Category category);
 
+	List<Products> findAllByVisibilityTrueAndProductNameContainingIgnoreCase(String keyword);
+
 }

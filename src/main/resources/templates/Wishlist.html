@@ -1,0 +1,42 @@
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+    <div class="row bg-dark bg-opacity-50 text-center py-5">
+        <h2 class="fw-bold fs-1 py-3">My Wishlist</h2>
+    </div>
+
+    <div class="container my-5">
+
+        <div th:if="${#lists.isEmpty(items)}" class="text-center py-5">
+            <p class="fs-5">Your wishlist is empty.</p>
+            <a href="/shop" class="btn btn-dark rounded-0 px-4">Browse the Shop</a>
+        </div>
+
+        <div class="row g-4" th:unless="${#lists.isEmpty(items)}">
+            <div class="col-md-3" th:each="item : ${items}">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a th:href="@{'/Product/' + ${item.product.id}}">
+                        <img th:if="${!#lists.isEmpty(item.product.productImages)}"
+                             th:src="@{'/ProductImages/' + ${item.product.productImages[0]}}"
+                             class="card-img-top" style="height:260px;object-fit:cover" alt="">
+                    </a>
+                    <div class="card-body">
+                        <h6 class="card-title" th:text="${item.product.productName}"></h6>
+                        <p class="text-warning fw-bold mb-2">₹<span th:text="${item.product.finalprice}"></span></p>
+                        <div class="d-flex gap-2">
+                            <a th:href="@{'/Product/' + ${item.product.id}}" class="btn btn-sm btn-dark flex-fill">View</a>
+                            <form th:action="@{'/wishlist/toggle/' + ${item.product.id}}" method="post">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

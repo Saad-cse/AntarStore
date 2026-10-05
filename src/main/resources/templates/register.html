@@ -1,72 +1,106 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row" style="min-height:100vh">
-         <div class="col-md-6 text-center  d-flex justify-content-center align-items-center">
-             <div class="">
-                  <img alt="image not found " src="images/r3.png" class="w-50 ">
-                  <h3 style="font-family:monotype corsiva " class=" fs-1 fw-bold">AntarStore</h3>
-                  <p>Register here to shop our premium collection</p>
-                 
-             </div>
-         </div>
-        <div class="col-md-6 d-flex justify-content -center align-items-center">
-             <div class="card rounded-0 py-3 px-4 w-100">
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+    <div class="antar-auth-wrap">
+
+        <div class="antar-auth-image" th:style="'background-image:url(' + @{/images/slider-hero.png} + ')'">
+            <div class="antar-auth-image-caption">
+                <div class="eyebrow">AntarStore</div>
+                <h2>Join the Atelier</h2>
+                <p>Create an account for a faster checkout, order tracking, and a wishlist that's always saved.</p>
+            </div>
+        </div>
+
+        <div class="antar-auth-panel">
+            <div class="antar-auth-card">
+
+                <div class="eyebrow">AntarStore</div>
+                <h1>Create Account</h1>
+                <p class="antar-auth-sub">Register here to shop our premium collection.</p>
+
+                <div class="antar-auth-tabs">
+                    <a href="/Login">Sign In</a>
+                    <a href="/Register" class="active">Register</a>
+                </div>
+
+                <div class="antar-alert" th:if="${msg != null and msg != ''}" th:text="${msg}"></div>
+
                 <form action="/Register" method="post" th:object="${dto}">
-                    <div class="mt-3">
-                       <label class="text-uppercase">Enter your name*</label>
-                       <input th:field="${dto.name}" type="text" required class="form-control rounded-0 mt-2" placeholder="Enter Name...">
+
+                    <div class="antar-field">
+                        <label>Full Name</label>
+                        <input th:field="*{name}" type="text" required placeholder="Your full name">
                     </div>
-                    <div class="mt-3">
-                       <label class="text-uppercase">
-                           Enter Contact No
-                       </label>
-                       <input th:field="${dto.contactNo}" type="number" required class="form-control mt-2 rounded-0 "placeholder=" Contact No...">
+
+                    <div class="antar-field">
+                        <label>Mobile Number</label>
+                        <input th:field="*{contactNo}" type="text" inputmode="numeric" required placeholder="10-digit mobile number">
                     </div>
-                    <div class="mt-3">
-                       <label class="text-uppercase">
-                           Enter Email Address
-                       </label>
-                       <input th:field="${dto.email}" type="email" required class="form-control mt-2 rounded-0 "placeholder=" Enter Email...">
+
+                    <div class="antar-field">
+                        <label>Email Address</label>
+                        <input th:field="*{email}" type="email" required placeholder="you@example.com">
                     </div>
-                    <div class="mt-3">
-                       <label class="text-uppercase">
-                           Select Gender
-                       </label>
-                       <select th:field="${dto.gender}" class="form-control rounded-0 mt-2">
+
+                    <div class="antar-field">
+                        <label>Gender</label>
+                        <select th:field="*{gender}">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
-                       </select>
+                        </select>
                     </div>
-                    <div class="mt-3">
-                       <label class="text-uppercase">
-                           Enter Password
-                       </label>
-                       <input th:field="${dto.password}" type="password" required class="form-control mt-2 rounded-0 "placeholder=" Enter Password...">
+
+                    <div class="antar-field antar-field-pass">
+                        <label>Password</label>
+                        <input th:field="*{password}" type="password" id="reg-password" required minlength="6" placeholder="Minimum 6 characters">
+                        <button type="button" id="reg-pass-toggle" aria-label="Show password">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <div class="antar-strength"><div class="antar-strength-bar" id="strength-bar"></div></div>
                     </div>
-                    <div class="mt-5 text-center">
-                        <button type="submit" class="btn btn-warning">Register</button>
-                    </div>
+
+                    <button type="submit" class="antar-auth-submit">Register Account</button>
+
                 </form>
-             </div>
+
+                <p class="text-center mt-4" style="font-size:13.5px;">
+                    Already have an account? <a th:href="@{/Login}">Sign in</a>
+                </p>
+
+            </div>
         </div>
-      </div>
+
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script >
-        var msg ="[[${msg}]]";
-        if(msg!=""){
-        	alert(msg);
+</main>
+<script>
+    (function(){
+        var btn = document.getElementById('reg-pass-toggle');
+        var input = document.getElementById('reg-password');
+        if (btn && input) {
+            btn.addEventListener('click', function(){
+                var isPass = input.type === 'password';
+                input.type = isPass ? 'text' : 'password';
+                btn.innerHTML = isPass ? '<i class="fa-regular fa-eye-slash"></i>' : '<i class="fa-regular fa-eye"></i>';
+            });
         }
-    </script>
-  </body>
+        var bar = document.getElementById('strength-bar');
+        if (input && bar) {
+            input.addEventListener('input', function(){
+                var v = input.value;
+                var score = 0;
+                if (v.length >= 6) score++;
+                if (v.length >= 10) score++;
+                if (/[A-Z]/.test(v)) score++;
+                if (/[0-9]/.test(v)) score++;
+                if (/[^A-Za-z0-9]/.test(v)) score++;
+                var pct = Math.min(100, (score / 5) * 100);
+                var color = score <= 1 ? '#c0392b' : score <= 3 ? '#d4a017' : '#2f8f4e';
+                bar.style.width = pct + '%';
+                bar.style.background = color;
+            });
+        }
+    })();
+</script>
+</body>
 </html>

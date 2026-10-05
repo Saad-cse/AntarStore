@@ -7,8 +7,9 @@
         <!-- Heading -->
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h2 class="fw-bold">Shop Our Collection</h2>
-                <p class="text-muted">
+                <h2 class="fw-bold" th:if="${q == null or q == ''}">Shop Our Collection</h2>
+                <h2 class="fw-bold" th:unless="${q == null or q == ''}">Search results for "<span th:text="${q}"></span>"</h2>
+                <p class="text-muted" th:if="${q == null or q == ''}">
                     Shop our premium collection from AntarStore
                 </p>
             </div>
@@ -57,7 +58,7 @@
 
                         <h6>
                             Total Products :
-                            <span class="badge bg-primary"
+                            <span class="badge antar-badge-ink"
                                   th:text="${products.size()}"></span>
                         </h6>
 
@@ -81,7 +82,7 @@
                             <div class="card-body d-flex flex-column">
 
                                 <!-- Discount -->
-                                <span class="badge bg-danger align-self-start mb-2"
+                                <span class="badge antar-badge-wine align-self-start mb-2"
                                       th:text="${product.discount+'% OFF'}">
                                 </span>
 

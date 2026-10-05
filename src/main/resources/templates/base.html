@@ -12,52 +12,88 @@
     <link  rel="stylesheet" th:href="@{/css/antar-theme.css}">
   </head>
   <body>
-       <div class="container-fluid">
+       <div class="container-fluid px-0">
            <!-- Header Section -->
-           <div class="row sticky-top ">
-              <div class="nav-bar ">
+           <div class="sticky-top">
+
+              <!-- Row 1: brand + utility icons -->
+              <div class="antar-topbar">
                 <a class="navbar-brand d-flex align-items-center" href="/">
                   <img class="logo brand-logo"  alt="AntarStore" th:src="@{/images/antar-logo.png}">
-
                      <div class="ms-2">
                        <h2 class="m-0 brand-word">AntarStore</h2>
                        <small class="brand-tagline">PREMIUM FASHION</small>
                     </div>
-                 </a> 
-                 <div class="nav-menu">
-               
-                    <a href="/">HOME</a>
-                    <a href="/shop">SHOP</a>
-                    <a href="/blog">BLOG</a>
-                    <a href="/about">ABOUT</a>
-                    <a href="/ContactUs">CONTACT Us</a>
-                    <a href="/Login" th:if="${session.loggedInUser == null}">LOGIN</a>
-                    <a href="/Register" th:if="${session.loggedInUser == null}">REGISTER</a>
-                    <div  class="nav-item dropdown " th:if="${session.loggedInUser != null}">
-                        <a class="nav-link dropdown-toggle fs-6" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            User
-                        </a>  
-                        <ul class="dropdown-menu w-50 list-unstyled">
-                           <li><a class="dropdown-item" href="/Profile">My Profile</a></li>
-                           <li><a class="dropdown-item" href="/MyOrders">My Orders</a></li>
-                           <li><a class="dropdown-item" href="/address">Saved Address</a></li>
-                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                        </ul>
-                    </div>                      
-                  
+                 </a>
+
+                 <div class="antar-topbar-actions">
+                    <a href="/blog" class="antar-text-link d-none d-md-inline">Blogs</a>
+                    <a href="/FAQ" class="antar-text-link d-none d-md-inline">FAQs</a>
+
+                    <label class="antar-theme-switch" title="Toggle dark/light mode">
+                       <input type="checkbox" id="theme-toggle">
+                       <span class="antar-theme-track">
+                          <span class="antar-theme-thumb">
+                             <i class="fa-solid fa-sun" id="theme-icon"></i>
+                          </span>
+                       </span>
+                    </label>
+
+                    <button type="button" id="search-toggle" class="antar-icon-btn" title="Search" aria-label="Search">
+                       <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                    <a href="/Wishlist" class="antar-icon-btn antar-icon-badge" title="Wishlist">
+                       <i class="fa-regular fa-heart"></i>
+                       <span class="antar-badge" th:if="${navWishlistCount != null and navWishlistCount > 0}" th:text="${navWishlistCount}"></span>
+                    </a>
+
+                    <a href="/cart" class="antar-icon-btn antar-icon-badge" title="Cart">
+                       <i class="fa-solid fa-bag-shopping"></i>
+                       <span class="antar-badge" th:if="${navCartCount != null and navCartCount > 0}" th:text="${navCartCount}"></span>
+                    </a>
+
+                    <div class="dropdown">
+                       <button class="antar-icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Account">
+                          <i class="fa-regular fa-user"></i>
+                       </button>
+                       <ul class="dropdown-menu dropdown-menu-end" th:if="${session.loggedInUser != null}">
+                          <li><a class="dropdown-item" href="/Profile">My Profile</a></li>
+                          <li><a class="dropdown-item" href="/MyOrders">My Orders</a></li>
+                          <li><a class="dropdown-item" href="/Wishlist">My Wishlist</a></li>
+                          <li><a class="dropdown-item" href="/address">Saved Address</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                       </ul>
+                       <ul class="dropdown-menu dropdown-menu-end" th:if="${session.loggedInUser == null}">
+                          <li><a class="dropdown-item" href="/Login">Login</a></li>
+                          <li><a class="dropdown-item" href="/Register">Register</a></li>
+                       </ul>
+                    </div>
                  </div>
-                 
-                    <div class="icon me-5">
-                    <!--  <input type="text" id="search-box"  class="search-box" placeholder="Search product & categories...">-->
-                    <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
-                    <i class="fa-regular fa-heart"></i>
-                    <a href="/cart" class="text-dark"> <i class="fa-solid fa-cart-flatbed"></i></a>
-                    
-                </div>
-                 
-             </div>
-            
-                       
+              </div>
+
+              <!-- Expandable search bar -->
+              <div id="search-bar-row" class="antar-search-row d-none">
+                 <form th:action="@{/shop}" method="get" class="antar-search-form">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="q" placeholder="Search products..." autocomplete="off" th:value="${q}">
+                 </form>
+              </div>
+
+              <!-- Row 2: pill navigation (hidden on the auth pages - a clean,
+                   focused sign-in/register screen shouldn't repeat the main
+                   site nav right below the topbar) -->
+              <div class="antar-pillbar"
+                   th:unless="${currentPath == '/Login' or currentPath == '/Register'}">
+                 <a href="/" class="antar-pill">Home</a>
+                 <a href="/shop" class="antar-pill">Shop</a>
+                 <a href="/blog" class="antar-pill">Blog</a>
+                 <a href="/about" class="antar-pill">About Us</a>
+                 <a href="/ContactUs" class="antar-pill">Contact Us</a>
+              </div>
+
+           </div>
         </div>
            
            
@@ -108,7 +144,6 @@
                     </div>
                  </div>
               </div>
-         </div>  
           <!--   <div class=" row py-5 my-5">
                <div class="footer">
                
@@ -160,5 +195,54 @@
                   																
        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+      // Dark/light mode toggle, persisted per-browser via localStorage.
+      (function () {
+        var root = document.documentElement;
+        var icon = document.getElementById('theme-icon');
+        var saved = localStorage.getItem('antar-theme');
+        // NOTE: Font Awesome's free tier only ships a SOLID sun/moon icon,
+        // not a "regular" sun - swapping just the icon name while leaving an
+        // old style class in place silently fell back to a generic/broken
+        // glyph. Both the icon name AND its style class must swap together.
+        function setIcon(isDark) {
+          if (!icon) return;
+          icon.classList.remove('fa-regular', 'fa-solid', 'fa-moon', 'fa-sun');
+          icon.classList.add('fa-solid', isDark ? 'fa-moon' : 'fa-sun');
+        }
+        var toggle = document.getElementById('theme-toggle');
+        if (saved === 'dark') {
+          root.setAttribute('data-theme', 'dark');
+          setIcon(true);
+          if (toggle) toggle.checked = true;
+        }
+        if (toggle) {
+          toggle.addEventListener('change', function () {
+            if (toggle.checked) {
+              root.setAttribute('data-theme', 'dark');
+              localStorage.setItem('antar-theme', 'dark');
+              setIcon(true);
+            } else {
+              root.removeAttribute('data-theme');
+              localStorage.setItem('antar-theme', 'light');
+              setIcon(false);
+            }
+          });
+        }
+
+        // Expandable search bar
+        var searchToggle = document.getElementById('search-toggle');
+        var searchRow = document.getElementById('search-bar-row');
+        if (searchToggle && searchRow) {
+          searchToggle.addEventListener('click', function () {
+            searchRow.classList.toggle('d-none');
+            if (!searchRow.classList.contains('d-none')) {
+              var input = searchRow.querySelector('input[name="q"]');
+              if (input) input.focus();
+            }
+          });
+        }
+      })();
+    </script>
     </body>
 </html>
