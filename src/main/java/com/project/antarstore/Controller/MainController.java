@@ -92,7 +92,29 @@ public class MainController {
 	}
 
 	@GetMapping("/")
-	public String showIndex() {
+	public String showIndex(Model model) {
+
+		// Homepage "Shop By Category": first 4 visible categories, with a live
+		// count of visible products in each. Labels are built here (not in the
+		// template) so the template stays simple.
+		List<Category> homeCategories = categoryRepo.findAllByIsVisible(true).stream().limit(4).toList();
+		Map<Long, String> homeCategoryLabels = new java.util.HashMap<>();
+		for (Category c : homeCategories) {
+			int count = productRepo.findAllByCategoryAndVisibilityTrue(c).size();
+			homeCategoryLabels.put(c.getId(), count == 1 ? "1 PRODUCT" : count + " PRODUCTS");
+		}
+
+		// Homepage "Featured Selection": the 4 newest visible products that
+		// have at least one image (the card needs one to display).
+		List<Products> featuredProducts = productRepo.findAllByVisibilityTrue().stream()
+				.filter(p -> p.getProductImages() != null && !p.getProductImages().isEmpty())
+				.sorted(java.util.Comparator.comparingLong(Products::getId).reversed())
+				.limit(4)
+				.toList();
+
+		model.addAttribute("homeCategories", homeCategories);
+		model.addAttribute("homeCategoryLabels", homeCategoryLabels);
+		model.addAttribute("featuredProducts", featuredProducts);
 		return "index";
 	}
 

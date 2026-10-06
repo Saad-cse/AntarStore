@@ -720,3 +720,25 @@ html[data-theme="dark"] .antar-stats-strip{
 
 /* ---------- Small utility ---------- */
 .rounded-0{ border-radius:0 !important; }
+
+/* ---------- Blog page (works in both light and dark mode) ---------- */
+.blog-card-img{ height:280px; object-fit:cover; }
+.blog-read-link{ color:var(--antar-gold-deep); }
+.blog-read-link:hover{ color:var(--antar-ink); }
+html[data-theme="dark"] .blog-read-link{ color:var(--antar-gold); }
+html[data-theme="dark"] .blog-read-link:hover{ color:#fff; }
+html[data-theme="dark"] .antar-filter-pill{
+  color:#f3ede3;
+  border-color:rgba(243,237,227,.25);
+}
+html[data-theme="dark"] .antar-filter-pill.active,
+html[data-theme="dark"] .antar-filter-pill:hover{
+  background:var(--antar-gold);
+  border-color:var(--antar-gold);
+  color:#1c1a17;
+}
+html[data-theme="dark"] .list-group-item{
+  background:transparent;
+  color:#f3ede3;
+  border-color:rgba(243,237,227,.12);
+}

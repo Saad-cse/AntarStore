@@ -58,52 +58,35 @@
              </div>
           </div>
           
-          <!-- Shop by categary start -->
+          <!-- Shop by category start (data comes from MainController.showIndex) -->
           <div class="row featured pt-5 my-4 py-4">
                     <div class="col-sm-10 mx-auto">
                         <div class="heading">
                            <p>BROWSE BY</p>
                            <h1>Shop By Category</h1>
                            <hr class="w-25 mx-auto">
-                           
                         </div>
                         <div class="row py-2">
-                             <!--category card start-->
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/ethnic4.png}" class="img-fluid">
-                                   <h5 class="pt-2">Ethnic Wear</h5>
-                                   <p>MANY PRODUCTS</p>
-                                   
-                                </div>
+                             <p class="text-center py-4" th:if="${#lists.isEmpty(homeCategories)}">Categories are coming soon.</p>
+                             <div class="col-sm-3" th:each="c : ${homeCategories}">
+                                <a th:href="@{/shop(id=${c.id})}" class="text-decoration-none text-reset">
+                                   <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2 text-center">
+                                      <div class="py-4" style="color:var(--antar-gold);">
+                                         <i th:if="${c.categoryIcon != null and !#strings.isEmpty(c.categoryIcon)}"
+                                            th:class="${#strings.contains(c.categoryIcon, ' ') ? c.categoryIcon : 'fa-solid ' + c.categoryIcon} + ' fa-3x'"></i>
+                                         <i th:unless="${c.categoryIcon != null and !#strings.isEmpty(c.categoryIcon)}"
+                                            class="fa-solid fa-tag fa-3x"></i>
+                                      </div>
+                                      <h5 class="pt-2" th:text="${c.categoryName}">Category</h5>
+                                      <p th:text="${homeCategoryLabels.get(c.id)}">0 PRODUCTS</p>
+                                   </div>
+                                </a>
                              </div>
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/ethnic4.png}" class="img-fluid">
-                                   <h5 class="pt-2">Shirts</h5>
-                                   <p>MANY PRODUCTS</p>
-                                </div>
-                             </div>
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/jacket.png}" class="img-fluid">
-                                   <h5 class="pt-2">Knitwear</h5>
-                                   <p>MANY PRODUCTS</p>
-                                </div>
-                             </div>
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
-                                   <h5 class="pt-2">Knitwear</h5>
-                                   <p>Classic knitewear</p>
-                                </div>
-                             </div>
-                             <!-- Catrgory card -->
                         </div>
                      </div>
-                 </div>       
-          
-          <!-- Shop by categary end -->
+                 </div>
+          <!-- Shop by category end -->
+          <!-- Featured selection start (data comes from MainController.showIndex) -->
           <div class="row featured py-4">
                     <div class="col-sm-10 mx-auto">
                         <div class="heading">
@@ -113,89 +96,32 @@
                            <p>Our most-loved pieces, curated by our stylists for the season. Each garment tells a <br/>story of craftsmanship and style.</p>
                         </div>
                         <div class="row py-2">
-                             <!--Featured card start-->
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
-                                   <p class="pt-2">Knitwear</p>
-                                   <h5>Vintage Denim jacket</h5>
-                                   <p><b>Rs.1</b> <s>Rs.7,499</s> <b class="text-success">100%</b></p>
-                                   <p class="text-warning pt-1">
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <span class="text-dark">(5.0/199 ratings)</span>
-
-                                   </p>
-                                    <span class="badge bg-dark text-light w-25 featuredis position-absolute">-19%</span>
-                                </div>
+                             <p class="text-center py-4" th:if="${#lists.isEmpty(featuredProducts)}">New arrivals are coming soon.</p>
+                             <div class="col-sm-3" th:each="p : ${featuredProducts}">
+                                <a th:href="@{'/Product/'+${p.id}}" class="text-decoration-none text-reset">
+                                   <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
+                                      <img th:src="@{'/ProductImages/'+${p.productImages.get(0)}}" class="img-fluid" alt="Product">
+                                      <p class="pt-2" th:text="${p.category?.categoryName}">Category</p>
+                                      <h5 th:text="${p.productName}">Product</h5>
+                                      <p>
+                                         <b>&#8377;<span th:text="${p.finalprice}"></span></b>
+                                         <s th:if="${p.discount > 0}">&#8377;<span th:text="${p.sellingPrice}"></span></s>
+                                      </p>
+                                      <span class="badge bg-dark text-light w-25 featuredis position-absolute"
+                                            th:if="${p.discount > 0}" th:text="'-' + ${p.discount} + '%'">-10%</span>
+                                   </div>
+                                </a>
                              </div>
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/i1.png}" class="img-fluid">
-                                   <p class="pt-2">SHIRTS</p>
-                                   <h5>Classic White Linen Shirt</h5>
-                                   <p><b>Rs.2,999</b><s>Rs.3,499</s><b class="text-success">19%</b></p>
-                                   <p class="text-warning pt-1">
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <span class="text-dark">(5.0/199 ratings)</span>
-
-                                   </p>
-                                    <span class="badge bg-dark text-light w-25 featuredis position-absolute">-19%</span>
-                                </div>
-                             </div>
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
-                                   <p class="pt-2">SHIRTS</p>
-                                   <h5>Classic White Linen Shirt</h5>
-                                   <p><b>Rs.2,999</b><s>Rs.3,499</s><b class="text-success">19%</b></p>
-                                   <p class="text-warning pt-1">
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <span class="text-dark">(5.0/199 ratings)</span>
-
-                                   </p>
-                                    <span class="badge bg-dark text-light w-25 featuredis position-absolute">-19%</span>
-                                </div>
-                             </div>
-                             <div class="col-sm-3">
-                                <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
-                                   <p class="pt-2">SHIRTS</p>
-                                   <h5>Classic White Linen Shirt</h5>
-                                   <p><b>Rs.2,999</b><s>Rs.3,499</s><b class="text-success">19%</b></p>
-                                   <p class="text-warning pt-1">
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <i class="fa-solid fa-star"></i>
-                                      <span class="text-dark">(5.0/199 ratings)</span>
-
-                                   </p>
-                                    <span class="badge bg-dark text-light w-25 featuredis position-absolute">-19%</span>
-                                </div>
-                             </div>
-                             <!--Featured card end-->
                              <!-- BUTTON  start -->
                               <div class="text-center pt-4">
-                               <a class="btn btn-outline-dark">Explore All Produsts<i class="fa-solid fa-arrow-right"> </i></a>
+                               <a th:href="@{/shop}" class="btn btn-outline-dark">Explore All Products <i class="fa-solid fa-arrow-right"> </i></a>
                              </div>
                              <!-- button end -->
                         </div>
                     </div>
                 </div>
-          
+          <!-- Featured selection end -->
+
           <!--Story start-->
                   <div class="row story py-4">
                      <div class="col-sm-5 mx-auto story ">
@@ -208,7 +134,7 @@
 
                           <p>Our commitment to quality means every stitch is intentional, every <br>silhouette is considered, and every collection is designed to become<br> part of your story.</p>
                           <div class="text-start pt-5 ">
-                                 <a class="btn btn-dark">MEET THE BRANDS<i class="fa-solid fa-arrow-right"> </i></a>
+                                 <a th:href="@{/about}" class="btn btn-dark">MEET THE BRANDS <i class="fa-solid fa-arrow-right"> </i></a>
                           </div>
                           
                       </div>

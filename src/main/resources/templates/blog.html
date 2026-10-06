@@ -23,8 +23,8 @@
 
 <!-- CATEGORY TABS -->
                 <div class="py-3 px-3 text-center">
-                    <button type="submit" class="btn antar-filter-pill active">All</button>
-                    <button type="submit" class="btn antar-filter-pill">Shirts</button>
+                    <button type="button" class="btn antar-filter-pill active">All</button>
+                    <button type="button" class="btn antar-filter-pill">Shirts</button>
                 </div>
 
             
@@ -42,15 +42,15 @@
                 <!-- Card 1 -->
                 <div class="col-md-6">
 
-                    <div class="card">
+                    <div class="card h-100">
 
-                        <img src="images/shirt2.png"
-                             class="card-img-top"
-                             height="280">
+                        <img th:src="@{/images/shirt2.png}"
+                             class="card-img-top blog-card-img"
+                             alt="">
 
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
 
-                            <span class="badge text-bg-light border">
+                            <span class="badge text-bg-light border align-self-start">
                                 SHIRTS
                             </span>
 
@@ -58,14 +58,14 @@
                                 What is a Clothing Brand?
                             </h4>
 
-                            <div class="d-flex justify-content-between mt-5">
+                            <div class="d-flex justify-content-between mt-auto pt-4">
 
                                 <small class="text-secondary">
                                     Mar 03, 2026
                                 </small>
 
                                 <a href="#"
-                                   class="text-dark text-decoration-none fw-semibold">
+                                   class="blog-read-link text-decoration-none fw-semibold">
                                     READ →
                                 </a>
 
@@ -80,15 +80,15 @@
                 <!-- Card 2 -->
                 <div class="col-md-6">
 
-                    <div class="card">
+                    <div class="card h-100">
 
-                        <img src="images/knitwear2.png"
-                             class="card-img-top"
-                             height="280">
+                        <img th:src="@{/images/knitwear2.png}"
+                             class="card-img-top blog-card-img"
+                             alt="">
 
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
 
-                            <span class="badge text-bg-light border">
+                            <span class="badge text-bg-light border align-self-start">
                                 SHIRTS
                             </span>
 
@@ -96,14 +96,14 @@
                                 Importance of Branding in Fashion
                             </h4>
 
-                            <div class="d-flex justify-content-between mt-5">
+                            <div class="d-flex justify-content-between mt-auto pt-4">
 
                                 <small class="text-secondary">
                                     Mar 03, 2026
                                 </small>
 
                                 <a href="#"
-                                   class="text-dark text-decoration-none fw-semibold">
+                                   class="blog-read-link text-decoration-none fw-semibold">
                                     READ →
                                 </a>
 
@@ -119,15 +119,15 @@
                   <!-- Card 3 -->
                 <div class="col-md-6">
 
-                    <div class="card">
+                    <div class="card h-100">
 
-                        <img src="images/top.png"
-                             class="card-img-top"
-                             height="280">
+                        <img th:src="@{/images/top.png}"
+                             class="card-img-top blog-card-img"
+                             alt="">
 
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column">
 
-                            <span class="badge text-bg-light border">
+                            <span class="badge text-bg-light border align-self-start">
                                 SHIRTS
                             </span>
 
@@ -135,14 +135,14 @@
                                 Latest Trends In The Clothing Industry
                             </h4>
 
-                            <div class="d-flex justify-content-between mt-5">
+                            <div class="d-flex justify-content-between mt-auto pt-4">
 
                                 <small class="text-secondary">
                                     Mar 03, 2026
                                 </small>
 
                                 <a href="#"
-                                   class="text-dark text-decoration-none fw-semibold">
+                                   class="blog-read-link text-decoration-none fw-semibold">
                                     READ →
                                 </a>
 
@@ -174,8 +174,8 @@
                                class="form-control"
                                placeholder="Search articles...">
 
-                        <button class="btn btn-dark">
-                            🔍
+                        <button type="button" class="btn btn-warning" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 
                     </div>
@@ -187,7 +187,7 @@
             <!-- Shop The Look -->
             <div class="card mb-4">
 
-                <img src="images/newc.png"
+                <img th:src="@{/images/newc.png}"
                      class="card-img-top">
 
                 <div class="card-body text-center">
@@ -196,9 +196,7 @@
                         Shop The Look
                     </h5>
 
-                   <a href="/shop"> <button class="btn btn-dark mt-3">
-                        Shop Now
-                    </button></a>
+                   <a th:href="@{/shop}" class="btn btn-warning mt-3">Shop Now</a>
 
                 </div>
 
