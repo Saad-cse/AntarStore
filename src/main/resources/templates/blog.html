@@ -2,12 +2,7 @@
     <body>
        <main>
 
-            <!-- NOTE: this page previously loaded its own copy of Bootstrap
-                 and Font Awesome, positioned in the body instead of <head>.
-                 base.html already provides both - the duplicate here loaded
-                 AFTER antar-theme.css in document order, so Bootstrap's
-                 default styles were winning the cascade tie-break over our
-                 theme specifically on this page. Removed. -->
+            <!-- Bootstrap / Font Awesome come from base.html - do not load them again here. -->
 
 <!-- TOP SECTION (matches the header style used on Wishlist/MyOrders/Address/FAQ) -->
             <section class="blog-top">
@@ -21,13 +16,11 @@
                      </div>
              </section>
 
-<!-- CATEGORY TABS -->
+<!-- CATEGORY TABS (filter the article cards below) -->
                 <div class="py-3 px-3 text-center">
-                    <button type="button" class="btn antar-filter-pill active">All</button>
-                    <button type="button" class="btn antar-filter-pill">Shirts</button>
+                    <button type="button" class="btn antar-filter-pill active" data-filter="all">All</button>
+                    <button type="button" class="btn antar-filter-pill" data-filter="shirts">Shirts</button>
                 </div>
-
-            
 
 
 <div class="container py-5">
@@ -37,37 +30,53 @@
         <!-- Left Side -->
         <div class="col-lg-8">
 
-            <div class="row g-4">
+            <div class="row g-4" id="blogGrid">
 
-                <!-- Card 1 -->
-                <div class="col-md-6">
+                <!-- Card 1 (featured, full width) -->
+                <div class="col-12 blog-item" data-category="shirts">
 
-                    <div class="card h-100">
+                    <div class="card h-100 overflow-hidden">
 
-                        <img th:src="@{/images/shirt2.png}"
-                             class="card-img-top blog-card-img"
-                             alt="">
+                        <div class="row g-0 h-100">
 
-                        <div class="card-body d-flex flex-column">
+                            <div class="col-md-6">
+                                <img th:src="@{/images/shirt2.png}"
+                                     class="blog-feature-img"
+                                     alt="What is a Clothing Brand?">
+                            </div>
 
-                            <span class="badge text-bg-light border align-self-start">
-                                SHIRTS
-                            </span>
+                            <div class="col-md-6">
 
-                            <h4 class="mt-4">
-                                What is a Clothing Brand?
-                            </h4>
+                                <div class="card-body d-flex flex-column h-100 p-4">
 
-                            <div class="d-flex justify-content-between mt-auto pt-4">
+                                    <span class="badge text-bg-light border align-self-start">
+                                        SHIRTS
+                                    </span>
 
-                                <small class="text-secondary">
-                                    Mar 03, 2026
-                                </small>
+                                    <h3 class="mt-3 blog-title">
+                                        What is a Clothing Brand?
+                                    </h3>
 
-                                <a href="#"
-                                   class="blog-read-link text-decoration-none fw-semibold">
-                                    READ →
-                                </a>
+                                    <p class="blog-excerpt mb-0">
+                                        More than a label: the story, the standards and the
+                                        stitching behind every piece you wear.
+                                    </p>
+
+                                    <div class="d-flex justify-content-between mt-auto pt-4">
+
+                                        <small class="blog-date">
+                                            Mar 03, 2026
+                                        </small>
+
+                                        <a href="#"
+                                           class="blog-read-link text-decoration-none fw-semibold"
+                                           title="Article page coming soon">
+                                            READ →
+                                        </a>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
@@ -78,13 +87,13 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="col-md-6">
+                <div class="col-md-6 blog-item" data-category="shirts">
 
                     <div class="card h-100">
 
                         <img th:src="@{/images/knitwear2.png}"
                              class="card-img-top blog-card-img"
-                             alt="">
+                             alt="Importance of Branding in Fashion">
 
                         <div class="card-body d-flex flex-column">
 
@@ -92,18 +101,19 @@
                                 SHIRTS
                             </span>
 
-                            <h4 class="mt-4">
+                            <h4 class="mt-4 blog-title">
                                 Importance of Branding in Fashion
                             </h4>
 
                             <div class="d-flex justify-content-between mt-auto pt-4">
 
-                                <small class="text-secondary">
+                                <small class="blog-date">
                                     Mar 03, 2026
                                 </small>
 
                                 <a href="#"
-                                   class="blog-read-link text-decoration-none fw-semibold">
+                                   class="blog-read-link text-decoration-none fw-semibold"
+                                   title="Article page coming soon">
                                     READ →
                                 </a>
 
@@ -115,15 +125,14 @@
 
                 </div>
 
-
-                  <!-- Card 3 -->
-                <div class="col-md-6">
+                <!-- Card 3 -->
+                <div class="col-md-6 blog-item" data-category="shirts">
 
                     <div class="card h-100">
 
                         <img th:src="@{/images/top.png}"
                              class="card-img-top blog-card-img"
-                             alt="">
+                             alt="Latest Trends In The Clothing Industry">
 
                         <div class="card-body d-flex flex-column">
 
@@ -131,18 +140,19 @@
                                 SHIRTS
                             </span>
 
-                            <h4 class="mt-4">
+                            <h4 class="mt-4 blog-title">
                                 Latest Trends In The Clothing Industry
                             </h4>
 
                             <div class="d-flex justify-content-between mt-auto pt-4">
 
-                                <small class="text-secondary">
+                                <small class="blog-date">
                                     Mar 03, 2026
                                 </small>
 
                                 <a href="#"
-                                   class="blog-read-link text-decoration-none fw-semibold">
+                                   class="blog-read-link text-decoration-none fw-semibold"
+                                   title="Article page coming soon">
                                     READ →
                                 </a>
 
@@ -152,6 +162,16 @@
 
                     </div>
 
+                </div>
+
+                <!-- Shown by the script when no article matches the filter/search -->
+                <div class="col-12 d-none" id="blogEmpty">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <p class="fs-5 mb-3">No articles match your search yet.</p>
+                            <button type="button" class="btn btn-warning" id="blogClear">Clear filters</button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -171,10 +191,11 @@
                     <div class="input-group">
 
                         <input type="text"
+                               id="blogSearch"
                                class="form-control"
                                placeholder="Search articles...">
 
-                        <button type="button" class="btn btn-warning" aria-label="Search">
+                        <button type="button" id="blogSearchBtn" class="btn btn-warning" aria-label="Search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
 
@@ -188,21 +209,21 @@
             <div class="card mb-4">
 
                 <img th:src="@{/images/newc.png}"
-                     class="card-img-top">
+                     class="card-img-top" alt="Shop the look">
 
                 <div class="card-body text-center">
-                     <i class="fa-solid fa-store"></i>
+                    <div class="blog-shop-icon"><i class="fa-solid fa-store"></i></div>
                     <h5 class="fw-bold">
                         Shop The Look
                     </h5>
 
-                   <a th:href="@{/shop}" class="btn btn-warning mt-3">Shop Now</a>
+                    <a th:href="@{/shop}" class="btn btn-warning mt-3">Shop Now</a>
 
                 </div>
 
             </div>
 
-            <!-- Categories -->
+            <!-- Categories (counts are recalculated from the cards by the script) -->
             <div class="card">
 
                 <div class="card-body">
@@ -213,24 +234,24 @@
 
                     <ul class="list-group list-group-flush">
 
-                        <li class="list-group-item d-flex justify-content-between">
+                        <li class="list-group-item d-flex justify-content-between blog-cat" data-filter="shirts" role="button" tabindex="0">
                             <span>Shirts</span>
-                            <span>3</span>
+                            <span class="blog-cat-count">3</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between">
+                        <li class="list-group-item d-flex justify-content-between blog-cat" data-filter="t-shirts" role="button" tabindex="0">
                             <span>T-Shirts</span>
-                            <span>5</span>
+                            <span class="blog-cat-count">0</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between">
+                        <li class="list-group-item d-flex justify-content-between blog-cat" data-filter="jeans" role="button" tabindex="0">
                             <span>Jeans</span>
-                            <span>4</span>
+                            <span class="blog-cat-count">0</span>
                         </li>
 
-                        <li class="list-group-item d-flex justify-content-between">
+                        <li class="list-group-item d-flex justify-content-between blog-cat" data-filter="fashion" role="button" tabindex="0">
                             <span>Fashion</span>
-                            <span>2</span>
+                            <span class="blog-cat-count">0</span>
                         </li>
 
                     </ul>
@@ -245,12 +266,70 @@
 
 </div>
 
-<!-- Bootstrap JS already loaded once by base.html; duplicate removed. -->
+<!-- Bootstrap JS is loaded once by base.html. This script only filters/searches the cards on this page. -->
+<script th:inline="none">
+(function () {
+    var items = Array.prototype.slice.call(document.querySelectorAll('.blog-item'));
+    var pills = Array.prototype.slice.call(document.querySelectorAll('.antar-filter-pill'));
+    var cats = Array.prototype.slice.call(document.querySelectorAll('.blog-cat'));
+    var searchBox = document.getElementById('blogSearch');
+    var searchBtn = document.getElementById('blogSearchBtn');
+    var emptyBox = document.getElementById('blogEmpty');
+    var clearBtn = document.getElementById('blogClear');
+    var filter = 'all';
 
+    // Real counts per category, taken from the cards themselves
+    cats.forEach(function (c) {
+        var key = c.getAttribute('data-filter');
+        var n = items.filter(function (el) { return el.getAttribute('data-category') === key; }).length;
+        c.querySelector('.blog-cat-count').textContent = n;
+        c.classList.toggle('blog-cat-empty', n === 0);
+    });
 
+    function apply() {
+        var q = searchBox.value.trim().toLowerCase();
+        var shown = 0;
+        items.forEach(function (el) {
+            var cat = el.getAttribute('data-category');
+            var title = el.querySelector('.blog-title').textContent.toLowerCase();
+            var catOk = (filter === 'all' || cat === filter);
+            var textOk = (q === '' || title.indexOf(q) !== -1);
+            var ok = catOk ? textOk : false;
+            el.classList.toggle('d-none', !ok);
+            if (ok) { shown++; }
+        });
+        emptyBox.classList.toggle('d-none', shown !== 0);
+        pills.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-filter') === filter); });
+        cats.forEach(function (c) { c.classList.toggle('active', c.getAttribute('data-filter') === filter); });
+    }
 
-    
-      
+    pills.forEach(function (p) {
+        p.addEventListener('click', function () { filter = p.getAttribute('data-filter'); apply(); });
+    });
+    cats.forEach(function (c) {
+        function pick() {
+            var key = c.getAttribute('data-filter');
+            filter = (filter === key) ? 'all' : key;   // click again to un-select
+            apply();
+        }
+        c.addEventListener('click', pick);
+        c.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); }
+        });
+    });
+    searchBox.addEventListener('input', apply);
+    searchBox.addEventListener('keydown', function (e) { if (e.key === 'Enter') { apply(); } });
+    searchBtn.addEventListener('click', apply);
+    clearBtn.addEventListener('click', function () { filter = 'all'; searchBox.value = ''; apply(); });
+
+    // No article pages exist yet, so keep READ links from jumping to the top of the page
+    Array.prototype.slice.call(document.querySelectorAll('.blog-read-link')).forEach(function (a) {
+        a.addEventListener('click', function (e) { e.preventDefault(); });
+    });
+
+    apply();
+})();
+</script>
 
       </main>
 
@@ -258,5 +337,3 @@
 
 
 </html>
-
-
