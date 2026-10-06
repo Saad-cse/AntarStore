@@ -2,43 +2,45 @@
    <body>
        <main>
               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-           <div class="row py-5 my-5">
-                <div class="col-md-6 text-center py-5 wy-25 ">
-                   <span class="d-block text-secondary py-4">EXPLORE COLLECTION</span>
-                   <h1 class=" fw-bold mb-3 display-3 " style="font-size: 90px;">Wear Your Story With Pride</h1>
-                   
-                   <p class="text-secondary mx-auto w-75 py-4">Curated fashion that bridges the timeless craft of Indian tradition with the clean lines of contempoorary style.</p>
-                    <button type="button" class="btn btn-dark text-start my-3">EXPLORE COLLECTION</button>
-                    <button type="button" class="btn btn-outline-secondary text-end">Our Story</button>
-                    <hr>
-                    <div class="row text-center py-3">
-                        <div class="col-md-4">
-                             <h1 class="fw-semibold">500<span class="fw-light"><sup>+</sup></span></h1>
-                             <p class="text-uppercase text-secondary">Products</p>
-                        </div>
-                        <div class="col-md-4">
-                             <h1 class="fw-semibold">12K<span class="fw-light"><sup>+</sup></span></h1>
-                             <p class="text-uppercase text-secondary">Happy Customers</p>
-                        </div>
-                        <div class="col-md-4">
-                             <h1 class="fw-semibold">4.9 &#9733;</h1>
-                             <p class="text-uppercase text-secondary">Average Rating</p>
-                        </div>
-                    </div>
-                   
-                 </div>
-                
-                 <div class="col-md-6 d-inline-block p-5 back  mx-auto mb-3 rounded text-center  backwidth" style=" background-color: #fff0f5 ;" >
-                   <img alt="image not found" src="images/slider-hero.png" class="img-thumbnail w-90  "/>
-                   
-                 </div>
-                 <p style="color: #f8d7da">Antar Collection</p>
+          <section class="antar-hero" th:style="'background-image:url(' + @{/images/ethnic1.png} + ')'">
+              <div class="antar-hero-overlay"></div>
+              <div class="container antar-hero-content">
+                  <div class="antar-hero-eyebrow">The Antar Edit</div>
+                  <h1 class="antar-hero-headline">Heritage Woven<br>Into Every Thread</h1>
+                  <p class="antar-hero-sub">
+                      Hand-finished silhouettes at the intersection of timeless Indian artistry and
+                      considered modern design — made for the way you actually live.
+                  </p>
+                  <div class="antar-hero-cta">
+                      <a href="/shop" class="btn antar-hero-btn-primary">Shop The Collection</a>
+                      <a href="/about" class="btn antar-hero-btn-secondary">Our Story</a>
+                  </div>
+              </div>
+          </section>
+
+          <div class="antar-stats-strip">
+              <div class="container">
+                  <div class="row text-center">
+                      <div class="col-4">
+                          <h2 class="antar-stat-number">500<span class="fw-light">+</span></h2>
+                          <p class="antar-stat-label">Products</p>
+                      </div>
+                      <div class="col-4">
+                          <h2 class="antar-stat-number">12K<span class="fw-light">+</span></h2>
+                          <p class="antar-stat-label">Happy Customers</p>
+                      </div>
+                      <div class="col-4">
+                          <h2 class="antar-stat-number">4.9 &#9733;</h2>
+                          <p class="antar-stat-label">Average Rating</p>
+                      </div>
+                  </div>
+              </div>
           </div>
-          
-         <div class="feature-strip "style="background: black">
-             <div class="container text-white d-flex justify-content-center align-items-center gap-5 py-3">
+
+         <div class="feature-strip antar-feature-strip">
+             <div class="container text-white d-flex justify-content-center align-items-center gap-5 py-3 flex-wrap">
                   <div class="strip-feature">
-                      <i class="fa-solid fa-arrow-right"></i>
+                      <i class="fa-solid fa-truck-fast"></i>
                       FREE SHIPPING OVER &#8377;5,000
                   </div>
                   <div class="strip-feature">
@@ -46,11 +48,11 @@
                        EASY 30-DAY RETURNS
                   </div>
                   <div class="strip-feature">
-                      <i class="fa-solid fa-box-archive"></i>
+                      <i class="fa-solid fa-lock"></i>
                       SECURE PAYMENT
                   </div>
                   <div class="strip-feature">
-                       <i class="fa-solid fa-phone"></i>
+                       <i class="fa-solid fa-headset"></i>
                        24/7 CUSTOMER SUPPORT
                   </div>
              </div>
@@ -69,7 +71,7 @@
                              <!--category card start-->
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/ethnic4.png" class="img-fluid">
+                                   <img th:src="@{/images/ethnic4.png}" class="img-fluid">
                                    <h5 class="pt-2">Ethnic Wear</h5>
                                    <p>MANY PRODUCTS</p>
                                    
@@ -77,21 +79,21 @@
                              </div>
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/ethnic4.png" class="img-fluid">
+                                   <img th:src="@{/images/ethnic4.png}" class="img-fluid">
                                    <h5 class="pt-2">Shirts</h5>
                                    <p>MANY PRODUCTS</p>
                                 </div>
                              </div>
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/jacket.png" class="img-fluid">
+                                   <img th:src="@{/images/jacket.png}" class="img-fluid">
                                    <h5 class="pt-2">Knitwear</h5>
                                    <p>MANY PRODUCTS</p>
                                 </div>
                              </div>
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/Knitwear.png" class="img-fluid">
+                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
                                    <h5 class="pt-2">Knitwear</h5>
                                    <p>Classic knitewear</p>
                                 </div>
@@ -114,7 +116,7 @@
                              <!--Featured card start-->
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/knitwear.png" class="img-fluid">
+                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
                                    <p class="pt-2">Knitwear</p>
                                    <h5>Vintage Denim jacket</h5>
                                    <p><b>Rs.1</b> <s>Rs.7,499</s> <b class="text-success">100%</b></p>
@@ -132,7 +134,7 @@
                              </div>
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/i1.png" class="img-fluid">
+                                   <img th:src="@{/images/i1.png}" class="img-fluid">
                                    <p class="pt-2">SHIRTS</p>
                                    <h5>Classic White Linen Shirt</h5>
                                    <p><b>Rs.2,999</b><s>Rs.3,499</s><b class="text-success">19%</b></p>
@@ -150,7 +152,7 @@
                              </div>
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/knitwear.png" class="img-fluid">
+                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
                                    <p class="pt-2">SHIRTS</p>
                                    <h5>Classic White Linen Shirt</h5>
                                    <p><b>Rs.2,999</b><s>Rs.3,499</s><b class="text-success">19%</b></p>
@@ -168,7 +170,7 @@
                              </div>
                              <div class="col-sm-3">
                                 <div class="card shadow-lg border border-1 border-light mx-auto featurecard position-relative p-2">
-                                   <img src="images/knitwear.png" class="img-fluid">
+                                   <img th:src="@{/images/knitwear.png}" class="img-fluid">
                                    <p class="pt-2">SHIRTS</p>
                                    <h5>Classic White Linen Shirt</h5>
                                    <p><b>Rs.2,999</b><s>Rs.3,499</s><b class="text-success">19%</b></p>
@@ -197,7 +199,7 @@
           <!--Story start-->
                   <div class="row story py-4">
                      <div class="col-sm-5 mx-auto story ">
-                         <img src="images/story.png" class="img-thumbnail">
+                         <img th:src="@{/images/story.png}" class="img-thumbnail">
                       </div>
                       <div class="col-sm-7">
                          <p class="firstpara">OUR PHILOSOPHY</p>

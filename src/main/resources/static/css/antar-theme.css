@@ -564,5 +564,159 @@ html[data-theme="dark"] .antar-field select option{ color:#000; }
 html[data-theme="dark"] .antar-auth-tabs{ background:rgba(255,255,255,.08); }
 html[data-theme="dark"] .antar-auth-tabs a{ color:#f1ece3; }
 
+/* ---------- Homepage hero ---------- */
+.antar-hero{
+  position:relative;
+  min-height:78vh;
+  background-size:cover;
+  background-position:right center;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+.antar-hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,
+      rgba(16,14,12,.93) 0%,
+      rgba(16,14,12,.78) 32%,
+      rgba(16,14,12,.35) 62%,
+      rgba(16,14,12,.08) 100%);
+}
+.antar-hero-content{
+  position:relative;
+  z-index:2;
+  max-width:600px;
+  padding:40px 24px;
+  color:#fbf8f3;
+}
+.antar-hero-eyebrow{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:12px;
+  font-weight:700;
+  color:var(--antar-gold);
+  margin-bottom:14px;
+}
+.antar-hero-headline{
+  font-family:'Playfair Display', Georgia, serif;
+  font-weight:700;
+  font-size:clamp(2.2rem, 5vw, 3.8rem);
+  line-height:1.12;
+  margin-bottom:20px;
+}
+.antar-hero-sub{
+  font-size:15.5px;
+  line-height:1.7;
+  color:#e7e0d4;
+  max-width:460px;
+  margin-bottom:30px;
+}
+.antar-hero-cta{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.antar-hero-btn-primary{
+  background:var(--antar-gold);
+  border:1px solid var(--antar-gold);
+  color:#15110d;
+  font-weight:700;
+  letter-spacing:.5px;
+  padding:12px 28px;
+  border-radius:2px;
+  transition:.2s ease;
+}
+.antar-hero-btn-primary:hover{
+  background:var(--antar-gold-deep);
+  border-color:var(--antar-gold-deep);
+  color:#15110d;
+}
+.antar-hero-btn-secondary{
+  background:transparent;
+  border:1px solid rgba(251,248,243,.6);
+  color:#fbf8f3;
+  font-weight:600;
+  letter-spacing:.5px;
+  padding:12px 28px;
+  border-radius:2px;
+  transition:.2s ease;
+}
+.antar-hero-btn-secondary:hover{
+  background:rgba(251,248,243,.12);
+  border-color:#fbf8f3;
+  color:#fbf8f3;
+}
+
+@media (max-width:767px){
+  .antar-hero{ min-height:62vh; background-position:center center; }
+  .antar-hero-overlay{ background:rgba(16,14,12,.72); }
+  .antar-hero-content{ max-width:100%; }
+}
+
+/* ---------- Stats strip (between hero and the shipping/returns strip) ---------- */
+.antar-stats-strip{
+  padding:34px 0;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+html[data-theme="dark"] .antar-stats-strip{
+  border-bottom-color:rgba(255,255,255,.08);
+}
+.antar-stat-number{
+  font-family:'Playfair Display', Georgia, serif;
+  color:var(--antar-gold-deep);
+  font-weight:700;
+  margin-bottom:2px;
+}
+.antar-stat-label{
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-size:12px;
+  color:var(--antar-muted);
+  margin:0;
+}
+
+/* ---------- Shipping / returns / payment / support strip ---------- */
+.antar-feature-strip{
+  background:var(--antar-ink) !important;
+}
+.antar-feature-strip .strip-feature{
+  font-size:12.5px;
+  letter-spacing:.5px;
+  font-weight:600;
+}
+.antar-feature-strip i{
+  color:var(--antar-gold);
+  margin-right:6px;
+}
+
+/* ---------- Shared bits for simple page headers (blog, etc.) ---------- */
+.antar-eyebrow-center{
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:12px;
+  font-weight:700;
+  color:var(--antar-gold);
+  margin-bottom:6px;
+}
+.antar-filter-pill{
+  border-radius:999px;
+  padding:7px 20px;
+  margin:0 4px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.3px;
+  border:1px solid rgba(0,0,0,.15);
+  background:transparent;
+  color:var(--antar-ink);
+  transition:.2s ease;
+}
+.antar-filter-pill.active,
+.antar-filter-pill:hover{
+  background:var(--antar-ink);
+  color:#fff;
+  border-color:var(--antar-ink);
+}
+
 /* ---------- Small utility ---------- */
 .rounded-0{ border-radius:0 !important; }
