@@ -93,28 +93,28 @@ public class MainController {
 
 	@GetMapping("/")
 	public String showIndex(Model model) {
+		// FIX: this previously supplied no data at all, so the homepage's
+		// "Shop By Category" and "Featured Selection" sections were hardcoded
+		// fake content (duplicate "Knitwear" categories, a "Classic White Linen
+		// Shirt" repeated three times with fabricated Rs.1/100%-off pricing and
+		// fictional "5.0/199 ratings" - there's no reviews feature at all).
+		// Real consequence: a store owner could add genuine products through
+		// the admin panel and the homepage would never reflect them. Now pulls
+		// real visible categories and the most recently added visible products.
+		List<Category> categories = categoryRepo.findAllByIsVisible(true);
+		List<Category> homeCategories = categories.size() > 4 ? categories.subList(0, 4) : categories;
+		model.addAttribute("homeCategories", homeCategories);
+		model.addAttribute("featuredProducts", productRepo.findTop4ByVisibilityTrueOrderByAddedAtDesc());
 
-		// Homepage "Shop By Category": first 4 visible categories, with a live
-		// count of visible products in each. Labels are built here (not in the
-		// template) so the template stays simple.
-		List<Category> homeCategories = categoryRepo.findAllByIsVisible(true).stream().limit(4).toList();
+		// Per-category product counts for the "Shop By Category" cards
+		// (template expects homeCategoryLabels.get(category.id)).
 		Map<Long, String> homeCategoryLabels = new java.util.HashMap<>();
 		for (Category c : homeCategories) {
-			int count = productRepo.findAllByCategoryAndVisibilityTrue(c).size();
-			homeCategoryLabels.put(c.getId(), count == 1 ? "1 PRODUCT" : count + " PRODUCTS");
+			long count = productRepo.findAllByCategoryAndVisibilityTrue(c).size();
+			homeCategoryLabels.put(c.getId(), count + (count == 1 ? " PRODUCT" : " PRODUCTS"));
 		}
-
-		// Homepage "Featured Selection": the 4 newest visible products that
-		// have at least one image (the card needs one to display).
-		List<Products> featuredProducts = productRepo.findAllByVisibilityTrue().stream()
-				.filter(p -> p.getProductImages() != null && !p.getProductImages().isEmpty())
-				.sorted(java.util.Comparator.comparingLong(Products::getId).reversed())
-				.limit(4)
-				.toList();
-
-		model.addAttribute("homeCategories", homeCategories);
 		model.addAttribute("homeCategoryLabels", homeCategoryLabels);
-		model.addAttribute("featuredProducts", featuredProducts);
+
 		return "index";
 	}
 

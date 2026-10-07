@@ -1,36 +1,48 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-     <div class="container-fluid">
-         <div class="row align-items-center" style="height:100vh; ">
-             <div class="col-md-6 mx-auto">
-               <div class="card shadow p-4">
-                   <h3 style="font-family: new times roman;">Verify otp here...</h3>
-                   <form action="/verify-otp" method="post">
-                      <label>Enter otp</label>
-                      <input name="otp"  type="text" class="form-control rounded-0 mt-2" placeholder="otp">
-                      <div class="mt-4 text-center">
-                         <button type="submit" class="btn btn-warning">Verify Otp</button>
-                      </div>
-                   </form>
-                   <a href="/resend-otp">Resend Otp</a>
-               </div>
+<html th:replace="~{base::Layout(~{::main})}">
+<body>
+<main>
+    <div class="antar-auth-wrap">
+
+        <div class="antar-auth-image" th:style="'background-image:url(' + @{/images/top.png} + ')'">
+            <div class="antar-auth-image-caption">
+                <div class="eyebrow">AntarStore</div>
+                <h2>Almost There</h2>
+                <p>One more step — verify your email and your account is ready to go.</p>
             </div>
-         
-         </div>
-     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script >
-        var msg = "[[${msg}]]";
-        if(msg!=""){
-        	alert(msg);
-        }
-    </script>
-  </body>
+        </div>
+
+        <div class="antar-auth-panel">
+            <div class="antar-auth-card">
+
+                <div class="eyebrow">AntarStore</div>
+                <h1>Verify Your Email</h1>
+                <p class="antar-auth-sub">
+                    We've sent a 6-digit code to your email address. Enter it below to activate your account.
+                </p>
+
+                <div class="antar-alert" th:if="${msg != null and msg != ''}" th:text="${msg}"></div>
+
+                <form action="/verify-otp" method="post">
+
+                    <div class="antar-field">
+                        <label>One-Time Password</label>
+                        <input name="otp" type="text" inputmode="numeric" maxlength="6"
+                               autocomplete="one-time-code" required placeholder="Enter 6-digit code"
+                               class="antar-otp-input">
+                    </div>
+
+                    <button type="submit" class="antar-auth-submit">Verify OTP</button>
+
+                </form>
+
+                <p class="text-center mt-4" style="font-size:13.5px;">
+                    Didn't get a code? <a th:href="@{/resend-otp}">Resend OTP</a>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
 </html>
